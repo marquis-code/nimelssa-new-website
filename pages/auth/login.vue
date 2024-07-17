@@ -1,4 +1,5 @@
 <template>
+<main>
   <section class="bg-white">
     <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
       <section
@@ -134,6 +135,8 @@
       </main>
     </div>
   </section>
+  <SuccessModal :showCloseButton="false" :showActionButton="true" title="Congratulations!!!" desc="Thanks For Signing up. Your Matric Number would undergo approval before voting commences." :show="showSuccessModal" @close="showSuccessModal = false" />
+</main>
 </template>
 
 <script>
@@ -142,6 +145,7 @@ export default {
   data() {
     return {
       processing: false,
+      showSuccessModal: false,
       form: {
         matric: "",
         password: "",
@@ -156,11 +160,19 @@ export default {
   methods: {
     handleLogin() {
       this.processing = true;
-      setTimeout(() => {
-        this.$toastr.s("Login was successful");
-        this.$router.push("/quiz/play");
-        this.processing = false;
-      }, 3000);
+      this.$axios.post('https://nimelssa-elections-backend.onrender.com/api/auth/login', this.form)
+    .then((res) => {
+      this.$toastr.s('Login was successful')
+      this.$router.push('/election/voting-categories')
+    })
+    .catch((error) => {
+      this.showSuccessModal = true;
+      this.$toastr.e(error.response.data.message)
+    })
+    .finally(() => {
+      this.processing = false
+    })
+
     },
   },
 };

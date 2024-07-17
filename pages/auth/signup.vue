@@ -71,7 +71,6 @@
           </div>
 
           <form
-            action="#"
             class="mt-8 w-full space-y-6"
             @submit.prevent="handleSignup"
           >
@@ -82,28 +81,28 @@
               </p>
             </div>
             <div class="col-span-6 w-full">
-              <label for="fname" class="block text-sm font-medium text-gray-700"
+              <label for="firstname" class="block text-sm font-medium text-gray-700"
                 >First Name
               </label>
 
               <input
-                id="fname"
-                v-model="form.fname"
+                id="firstname"
+                v-model="form.firstname"
                 type="text"
-                name="fname"
+                name="firstname"
                 class="mt-1 w-full rounded-md focus-within:border-green-500 border-gray-200 py-3 border outline-none px-3 bg-white text-sm text-gray-700 shadow-sm"
               />
             </div>
             <div class="col-span-6 w-full">
-              <label for="lname" class="block text-sm font-medium text-gray-700"
+              <label for="lastname" class="block text-sm font-medium text-gray-700"
                 >Last Name
               </label>
 
               <input
-                id="lname"
-                v-model="form.lname"
+                id="lastname"
+                v-model="form.lastname"
                 type="text"
-                name="lname"
+                name="lastname"
                 class="mt-1 w-full rounded-md border-gray-200 py-3 border outline-none px-3 bg-white text-sm text-gray-700 shadow-sm"
               />
             </div>
@@ -120,6 +119,23 @@
                 v-model="form.matric"
                 type="matric"
                 name="Matric"
+                class="mt-1 w-full rounded-md border-gray-200 py-3 border outline-none px-3 bg-white text-sm text-gray-700 shadow-sm"
+              />
+            </div>
+
+            <div class="col-span-6 w-full">
+              <label
+                for="Email"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Email
+              </label>
+
+              <input
+                id="Email"
+                v-model="form.email"
+                type="email"
+                name="Email"
                 class="mt-1 w-full rounded-md border-gray-200 py-3 border outline-none px-3 bg-white text-sm text-gray-700 shadow-sm"
               />
             </div>
@@ -162,12 +178,12 @@
             </div>
             <div class="w-full">
               <button
+                type="submit"
                 :disabled="!isFormEmpty || processing"
                 class="w-full shrink-0 disabled:opacity-25 disabled:cursor-not-allowed rounded-md border bg-black px-12 py-3 text-sm font-medium text-white transition"
               >
                 {{ processing ? "processing..." : "Sign up" }}
               </button>
-
               <p
                 class="pt-4 text-sm text-gray-500 sm:mt-0 text-center font-semibold"
               >
@@ -190,10 +206,11 @@ export default {
     return {
       processing: false,
       form: {
-        fname: "",
-        lname: "",
+        firstname: "",
+        lastname: "",
         matric: "",
         level: "",
+        email: "",
         password: "",
       },
     };
@@ -201,10 +218,11 @@ export default {
   computed: {
     isFormEmpty() {
       return !!(
-        this.form.fname &&
-        this.form.lname &&
+        this.form.firstname &&
+        this.form.lastname &&
         this.form.matric &&
         this.form.level &&
+        this.form.email &&
         this.form.password
       );
     },
@@ -212,11 +230,18 @@ export default {
   methods: {
     handleSignup() {
       this.processing = true;
-      setTimeout(() => {
-        this.$toastr.s("Membership account successful created");
-        this.$router.push("/auth/login");
-        this.processing = false;
-      }, 3000);
+      this.$axios.post('https://nimelssa-elections-backend.onrender.com/api/auth/register', this.form)
+    .then((res) => {
+      this.$toastr.s('Signup was successful')
+      this.$router.push('/auth/login')
+    })
+    .catch((error) => {
+      // this.errorMessage = error && error?.response?.data?.error
+      this.$toastr.e(this.errorMessage)
+    })
+    .finally(() => {
+      this.processing = false
+    })
     },
   },
 };

@@ -164,6 +164,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     "@nuxtjs/pwa",
+    '@nuxtjs/axios',
     "@luxdamore/nuxt-canvas-sketch",
     "@nuxtjs/pwa",
     // 'nuxt-headlessui'
@@ -196,6 +197,13 @@ export default {
       "fade-up",
       "zoom-in",
     ],
+  },
+   // Axios module configuration: https://go.nuxtjs.dev/config-axios
+   axios: {
+    proxy: true,
+    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
+    // baseURL: 'https://medinizebackend.onrender.com/'
+    baseURL: 'https://nimelssa-elections-backend.onrender.com/'
   },
   pwa: {
     meta: {
@@ -251,6 +259,6 @@ export default {
   },
 };
 
-MONGO_URI='mongodb+srv://nimelssaquiz:nimelssaquiz2024@nimelssaquiz.xrcdm88.mongodb.net/?retryWrites=true&w=majority'
-JWT_SECRET="NIMELSSA_QUIZ_2024"
-NODE_ENV="development"
+// MONGO_URI='mongodb+srv://nimelssaquiz:nimelssaquiz2024@nimelssaquiz.xrcdm88.mongodb.net/?retryWrites=true&w=majority'
+// JWT_SECRET="NIMELSSA_QUIZ_2024"
+// NODE_ENV="development"

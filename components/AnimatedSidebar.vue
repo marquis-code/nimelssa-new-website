@@ -6,8 +6,6 @@
       v-if="isOpen"
       @click="toggleSidebar"
     ></div>
-
-    <!-- Semi-Circular Sidebar -->
     <div
       :class="`fixed top-0 right-0 h-full z-20 transform transition-transform ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
@@ -71,7 +69,12 @@ export default {
     return {
       sidebarItems: [
         {
-          name: "NIMELSSA QUIZaaa",
+          name: "NIMELSSA Elections",
+          icon: "results",
+          path: "/election",
+        },
+        {
+          name: "NIMELSSA Quiz",
           icon: "results",
           path: "/quiz",
         },
