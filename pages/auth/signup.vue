@@ -160,7 +160,7 @@
               </select>
             </div>
 
-            <div class="col-span-6 w-full">
+            <div class="col-span-6 w-full relative">
               <label
                 for="Password"
                 class="block text-sm font-medium text-gray-700"
@@ -171,10 +171,16 @@
               <input
                 id="Password"
                 v-model="form.password"
-                type="password"
+                :type="showPassword ? 'text' : 'password'"
                 name="password"
                 class="mt-1 w-full rounded-md border-gray-200 py-3 border outline-none px-3 bg-white text-sm text-gray-700 shadow-sm"
               />
+              <img
+              @click="showPassword = !showPassword"
+              :src="require(`@/assets/icons/${eye}`)"
+              alt=""
+              class="absolute cursor-pointer top-9 right-4 h-6 w-6"
+            />
             </div>
             <div class="w-full">
               <button
@@ -205,6 +211,7 @@ export default {
   data() {
     return {
       processing: false,
+      showPassword: false,
       form: {
         firstname: "",
         lastname: "",
@@ -225,6 +232,9 @@ export default {
         this.form.email &&
         this.form.password
       );
+    },
+    eye() {
+      return !this.showPassword ? "eye-close.svg" : "eye-open.svg";
     },
   },
   methods: {
