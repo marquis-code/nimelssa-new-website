@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/election/vote", {data:[{}],fetch:{},mutations:void 0});

@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/election/voting-categories", {data:[{}],fetch:{},mutations:void 0});
