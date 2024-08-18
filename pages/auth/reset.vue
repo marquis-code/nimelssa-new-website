@@ -124,15 +124,6 @@
                 >
                   OTP
                 </label>
-
-                <!-- <input
-                  id="otp"
-                  v-model="form.otp"
-                  type="number"
-                  name="otp"
-                  :disabled="processing"
-                  class="mt-1 w-full rounded-md disabled:cursor-not-allowed border-gray-200 py-3 border outline-none px-3 bg-white text-sm text-gray-700 shadow-sm"
-                /> -->
                 <ClientOnly>
                   <PincodeInput
                     v-model="form.otp"
