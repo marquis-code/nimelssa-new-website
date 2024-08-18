@@ -570,7 +570,7 @@
         <p
           class="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500"
         >
-          My Nimelssa. Your Nimelssa. Our Nimelssa
+          My NIMELSSA. Your NIMELSSA. Our NIMELSSA
         </p>
 
         <ul

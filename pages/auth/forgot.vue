@@ -83,11 +83,12 @@
             </h1> -->
             </div>
 
-            <form class="mt-8 w-full space-y-6" @submit.prevent="handleLogin">
+            <form class="mt-8 w-full space-y-6" @submit.prevent="handleForgotPassword">
               <div>
-                <h1 class="font-semibold text-2xl">Welcome Back!</h1>
+                <h1 class="font-semibold text-2xl">Forgot Password</h1>
                 <p class="text-sm text-gray-600">
-                  Enter your credentials to loigin
+                  No worries, we will send to your email password-reset
+            information.
                 </p>
               </div>
               <div class="col-span-6 w-full">
@@ -119,41 +120,12 @@
                 </p>
               </div>
 
-              <div class="col-span-6 w-full relative">
-                <!-- <label
-                  for="Password"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  Password
-                </label> -->
-                <div class="flex items-center justify-between">
-                  <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                  <div class="text-sm">
-                    <nuxt-link to="/auth/forgot" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</nuxt-link>
-                  </div>
-                </div>
-
-                <input
-                  id="Password"
-                  v-model="form.password"
-                  :type="showPassword ? 'text' : 'password'"
-                  name="password"
-                  :disabled="processing"
-                  class="mt-1 w-full rounded-md disabled:cursor-not-allowed border-gray-200 py-3 border outline-none px-3 bg-white text-sm text-gray-700 shadow-sm"
-                />
-                <img
-                  @click="showPassword = !showPassword"
-                  :src="require(`@/assets/icons/${eye}`)"
-                  alt=""
-                  class="absolute cursor-pointer top-9 right-4 h-6 w-6"
-                />
-              </div>
               <div class="w-full">
                 <button
                   :disabled="!isFormValid || processing"
                   class="w-full shrink-0 disabled:opacity-25 disabled:cursor-not-allowed rounded-md border bg-black px-12 py-3 text-sm font-medium text-white transition"
                 >
-                  {{ processing ? "processing..." : "Sign in" }}
+                  {{ processing ? "processing..." : "Submit" }}
                 </button>
 
                 <p
@@ -162,7 +134,7 @@
                   Don't have an account?
                   <nuxt-link to="/auth/signup" class="text-gray-700 underline">
                     Sign up </nuxt-link
-                  >.
+                  >
                 </p>
               </div>
             </form>
@@ -172,10 +144,12 @@
     </section>
     <SuccessModal
       :showCloseButton="false"
-      :showActionButton="true"
+      :showActionButton="false"
       title="Congratulations!!!"
-      desc="Thanks For Signing up. Your Matric Number would undergo approval before voting commences."
+      desc="We are in the process resetting your password. Please Copy the 4 digit pin below to reset your password"
       :show="showSuccessModal"
+      actionPath="/auth/reset"
+      :extra="otp"
       @close="showSuccessModal = false"
     />
   </main>
@@ -189,19 +163,16 @@ export default {
       processing: false,
       showSuccessModal: false,
       showPassword: false,
+      otp: '',
       form: {
         matric: "",
-        password: "",
       },
       isTyping: false,
     };
   },
   computed: {
     isFormValid() {
-      return !!this.form.matric && !!this.form.password && this.isMatricValid;
-    },
-    eye() {
-      return !this.showPassword ? "eye-close.svg" : "eye-open.svg";
+      return !!this.form.matric && this.isMatricValid;
     },
     isMatricValid() {
       return /^\d{9}$/.test(this.form.matric);
@@ -211,30 +182,22 @@ export default {
     validateMatricNumber() {
       this.isTyping = true;
     },
-    handleLogin() {
+    handleForgotPassword() {
       this.processing = true;
       this.$axios
         .post(
-          "https://nimelssa-elections-backend.onrender.com/api/auth/login",
+          "https://nimelssa-elections-backend.onrender.com/api/auth/forgot-password",
           this.form
         )
         .then((res) => {
-          console.log(res?.data, 'data')
-          // this.showSuccessModal = true;
-          this.$toastr.s('Login was successful')
-          localStorage.setItem('accessToken', res.data.token);
-          localStorage.setItem('user', res.data.user);
-          this.$router.push('/election/voting-categories')
+          this.otp = res.data.otp
+          this.showSuccessModal = true;
+          sessionStorage.setItem('matric', this.form.matric)
+          // this.$toastr.s('Login was successful')
+          // this.$router.push('/auth/reset')
         })
         .catch((error) => {
-          console.error(error.response);
-          // if (
-          //   error.response.data.message ===
-          //   "Matric Number not approved. Contact Academic team to get your matric approved."
-          // ) {
-          //   this.showSuccessModal = true;
-          //   this.$toastr.e(error.response.data.message);
-          // }
+          this.$toastr.e(error.response.data.message);
         })
         .finally(() => {
           this.processing = false;

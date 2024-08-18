@@ -147,6 +147,8 @@ export default {
     { src: "@/plugins/doodle", mode: "client" },
     "~/plugins/fake3d-image.client.js",
     { src: "~/plugins/enlargeImage.js", mode: "client" },
+    '~/plugins/axios.js',
+    '~/plugins/fingerprint.js'
     // { src: "~plugins/crisp.js", mode: "client" },
     // { src: "~plugins/kromateBot.js", mode: "client" }
   ],
@@ -207,7 +209,7 @@ export default {
   },
   pwa: {
     meta: {
-      title: "My Nimelssa. Your Nimelaas. Our Nimelssa",
+      title: "My NIMELSSA. Your NIMELSSA. Our NIMELSSA",
       author: "Marquis",
       mobileAppIOS: false,
       mobileApp: true,
@@ -223,7 +225,7 @@ export default {
       sizes: [64, 120, 144, 152, 192, 384, 512],
     },
     manifest: {
-      name: "My Nimelssa. Your Nimelaas. Our Nimelssa",
+      name: "My NIMELSSA. Your NIMELSSA. Our NIMELSSA",
       lang: "fa",
       useWebmanifestExtension: false,
     },

@@ -2,7 +2,9 @@
   <main>
     <section class="bg-white">
       <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
-        <section class="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+        <section
+          class="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6"
+        >
           <img
             alt="Night"
             src="@/assets/images/add18.jpg"
@@ -11,20 +13,20 @@
           <div class="hidden lg:relative lg:block lg:p-12">
             <a class="block text-white" href="/">
               <span class="sr-only">Home</span>
+              <!-- SVG logo -->
               <svg
                 class="h-8 sm:h-10"
                 viewBox="0 0 28 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M0.41 10.3847C1.14777 7.4194 2.85643 4.7861 5.2639 2.90424C7.6714 1.02234 10.6393 0 13.695 0C16.7507 0 19.7186 1.02234 22.1261 2.90424C24.5336 4.7861 26.2422 7.4194 26.98 10.3847H25.78C23.7557 10.3549 21.7729 10.9599 20.11 12.1147C20.014 12.1842 19.9138 12.2477 19.81 12.3047H19.67C19.5662 12.2477 19.466 12.1842 19.37 12.1147C17.6924 10.9866 15.7166 10.3841 13.695 10.3841C11.6734 10.3841 9.6976 10.9866 8.02 12.1147C7.924 12.1842 7.8238 12.2477 7.72 12.3047H7.58C7.4762 12.2477 7.376 12.1842 7.28 12.1147C5.6171 10.9599 3.6343 10.3549 1.61 10.3847H0.41ZM23.62 16.6547C24.236 16.175 24.9995 15.924 25.78 15.9447H27.39V12.7347H25.78C24.4052 12.7181 23.0619 13.146 21.95 13.9547C21.3243 14.416 20.5674 14.6649 19.79 14.6649C19.0126 14.6649 18.2557 14.416 17.63 13.9547C16.4899 13.1611 15.1341 12.7356 13.745 12.7356C12.3559 12.7356 11.0001 13.1611 9.86 13.9547C9.2343 14.416 8.4774 14.6649 7.7 14.6649C6.9226 14.6649 6.1657 14.416 5.54 13.9547C4.4144 13.1356 3.0518 12.7072 1.66 12.7347H0V15.9447H1.61C2.39051 15.924 3.154 16.175 3.77 16.6547C4.908 17.4489 6.2623 17.8747 7.65 17.8747C9.0377 17.8747 10.392 17.4489 11.53 16.6547C12.1468 16.1765 12.9097 15.9257 13.69 15.9447C14.4708 15.9223 15.2348 16.1735 15.85 16.6547C16.9901 17.4484 18.3459 17.8738 19.735 17.8738C21.1241 17.8738 22.4799 17.4484 23.62 16.6547ZM23.62 22.3947C24.236 21.915 24.9995 21.664 25.78 21.6847H27.39V18.4747H25.78C24.4052 18.4581 23.0619 18.886 21.95 19.6947C21.3243 20.156 20.5674 20.4049 19.79 20.4049C19.0126 20.4049 18.2557 20.156 17.63 19.6947C16.4899 18.9011 15.1341 18.4757 13.745 18.4757C12.3559 18.4757 11.0001 18.9011 9.86 19.6947C9.2343 20.156 8.4774 20.4049 7.7 20.4049C6.9226 20.4049 6.1657 20.156 5.54 19.6947C4.4144 18.8757 3.0518 18.4472 1.66 18.4747H0V21.6847H1.61C2.39051 21.664 3.154 21.915 3.77 22.3947C4.908 23.1889 6.2623 23.6147 7.65 23.6147C9.0377 23.6147 10.392 23.1889 11.53 22.3947C12.1468 21.9165 12.9097 21.6657 13.69 21.6847C14.4708 21.6623 15.2348 21.9135 15.85 22.3947C16.9901 23.1884 18.3459 23.6138 19.735 23.6138C21.1241 23.6138 22.4799 23.1884 23.62 22.3947Z"
-                  fill="currentColor"
-                />
+                <!-- SVG Path here -->
               </svg>
             </a>
 
-            <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+            <h2
+              class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl"
+            >
               Welcome to The Nigerian Medical Laboratory Science Students
               Association (NIMELSSA)
             </h2>
@@ -38,49 +40,169 @@
           </div>
         </section>
 
-        <form @submit.prevent="submitVotes" class="px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6 w-full overflow-x-scroll hide-scrollbar">
+        <form
+          @submit.prevent="submitVotes"
+          class="px-4 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6 w-full overflow-x-scroll hide-scrollbar"
+        >
           <div class="mx-auto max-w-2xl text-center">
-            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            <h2
+              class="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+            >
               Electoral Candidates (#NIMELSSADECIDES2024)
             </h2>
-            <p class="mt-1 text-lg font-extrabold leading-8 text-gray-900">
+            <div>
+            </div>
+            <p class="mt-1 text-sm lg:text-lg font-extrabold leading-8 text-gray-900">
               Voting Begins: 4 days 14hrs 11mins 52seconds
             </p>
           </div>
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-6 overflow-y-auto h-[700px] hide-scrollbar">
-            <div v-for="role in roles" :key="role.key" class="mb-8">
-              <h2 class="text-lg font-semibold">{{ role.name }}</h2>
-              <p class="mb-4 text-sm">Select only one candidate</p>
-              <div v-for="candidate in role.candidates" :key="candidate.key" class="flex items-center mb-4">
+          <div v-if="!processing && candidatesList.length"
+            class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-6 overflow-y-auto h-[700px] hide-scrollbar"
+          >
+            <div
+              v-for="role in candidatesList"
+              :key="role.key"
+              class="mb-8"
+            >
+              <h2 class="text-base lg:text-lg text-gray-900 font-bold">{{ role.name }}</h2>
+              <p class="mb-4 text-sm">
+                Select {{ role.key.startsWith('senate') ? 'up to 3' : 'only one' }} candidate or withhold your vote
+              </p>
+
+              <div
+                v-if="role.key.startsWith('senate')"
+              >
+                <!-- Candidate Selection -->
+                <div
+                  v-for="candidate in role.candidates"
+                  :key="candidate.id"
+                  class="flex items-center mb-4"
+                >
+                  <label
+                    :for="candidate.id"
+                    class="flex cursor-pointer justify-between gap-4 w-full rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200"
+                    @click="toggleSenateSelection(role.key, candidate.id)"
+                  >
+                    <input
+                      type="checkbox"
+                      :name="role.key"
+                      :value="candidate.id"
+                      :checked="votes[role.key].includes(candidate.id)"
+                      :id="candidate.id"
+                      class="mr-4 h-6 w-6"
+                    />
+                    <img
+                      :src="candidate.image"
+                      alt="Candidate Image"
+                      class="w-16 rounded-lg h-16 object-cover mr-4"
+                    />
+                    <div>
+                      <h3 class="font-semibold">{{ candidate.name }}</h3>
+                      <p class="text-sm font-medium text-gray-700">
+                        {{ candidate.level }} Level
+                      </p>
+                    </div>
+                  </label>
+                </div>
+                <!-- Withhold Vote Option -->
+                <div class="flex items-center mb-4">
+                  <label
+                    :for="role.key + '-withhold'"
+                    class="flex cursor-pointer justify-between gap-4 w-full rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200"
+                    @click="withholdSenateVote(role.key)"
+                  >
+                    <input
+                      type="radio"
+                      :name="role.key"
+                      value=""
+                      v-model="votes[role.key]"
+                      :id="role.key + '-withhold'"
+                      class="mr-4 h-10 w-10"
+                    />
+                    <div>
+                      <h3 class="font-semibold">Withhold Vote</h3>
+                      <p class="text-sm font-medium text-gray-700">
+                        Choose this option if you do not want to vote for any candidate in this category.
+                      </p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Single choice for non-senate roles -->
+              <div
+              v-if="!role.key.startsWith('senate')"
+                v-for="candidate in role.candidates"
+                :key="candidate.id"
+                class="flex items-center mb-4"
+              >
                 <label
-                  :for="votes[role.key]"
+                  :for="candidate.id"
                   class="flex cursor-pointer justify-between gap-4 w-full rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200"
-                  @click="votes[role.key] = candidate.name"
+                  @click="votes[role.key] = candidate.id"
                 >
                   <input
                     type="radio"
                     :name="role.key"
-                    :value="candidate.name"
+                    :value="candidate.id"
                     v-model="votes[role.key]"
-                    id="candidate.name"
+                    :id="candidate.id"
                     class="mr-4 h-6 w-6"
                   />
                   <img
-                    :src="require(`@/assets/images/candidates/${candidate.image}`)"
+                    :src="candidate.image"
                     alt="Candidate Image"
                     class="w-16 rounded-lg h-16 object-cover mr-4"
                   />
                   <div>
                     <h3 class="font-semibold">{{ candidate.name }}</h3>
-                    <p class="text-sm font-medium text-gray-700">{{candidate.level}} Level</p>
+                    <p class="text-sm font-medium text-gray-700">
+                      {{ candidate.level }} Level
+                    </p>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Withhold Vote Option for non-senate roles -->
+              <div v-if="!role.key.startsWith('senate')" class="flex items-center mb-4">
+                <label
+                  :for="role.key + '-withhold'"
+                  class="flex cursor-pointer justify-between gap-4 w-full rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200"
+                  @click="votes[role.key] = ''"
+                >
+                  <input
+                    type="radio"
+                    :name="role.key"
+                    value=""
+                    v-model="votes[role.key]"
+                    :id="role.key + '-withhold'"
+                    class="mr-4 h-10 w-10"
+                  />
+                  <div>
+                    <h3 class="font-semibold">Withhold Vote</h3>
+                    <p class="text-sm font-medium text-gray-700">
+                      Choose this option if you do not want to vote for any candidate in this category.
+                    </p>
                   </div>
                 </label>
               </div>
             </div>
           </div>
+          <div v-else-if="processing" class="h-32 bg-slate-300 rounded w-full mt-6 animate-pulse"></div>
+          <div class="text-center border rounded-xl py-6 mt-6" v-else>
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+            </svg>
+            <h3 class="mt-2 text-sm font-semibold text-gray-900">No candidates available</h3>
+            <p class="mt-1 text-sm text-gray-500">Get started by creating a new candidate.</p>
+          </div>
           <div class="flex justify-center items-center mt-10">
-            <button type="submit" class="text-white bg-black rounded-lg px-6 py-3.5 w-full">
-              Submit
+            <button
+              type="submit"
+              :disabled="submitting"
+              class="text-white disabled:cursor-not-allowed disabled:opacity-25 bg-black rounded-lg px-6 py-3 w-full"
+            >
+              {{ submitting ? "processing" : "Submit"  }}
             </button>
           </div>
         </form>
@@ -91,178 +213,164 @@
 </template>
 
 <script>
-import SuccessModal from '@/components/SuccessModal.vue';
+import SuccessModal from "@/components/SuccessModal.vue";
 export default {
   layout: "auth",
   data() {
     return {
+      processing: false,
       showSuccessModal: false,
-      roles: [
-        {
-          name: 'President',
-          key: 'president',
-          candidates: [
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '400' },
-            { name: 'Julyn Divinagracia', image: 'candidate1.jpg', level: '500' },
-          ],
-        },
-        {
-          name: 'Vice President',
-          key: 'vice_president',
-          candidates: [
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '400' },
-            { name: 'Julyn Divinagracia', image: 'candidate1.jpg', level: '500' },
-          ],
-        },
-        {
-          name: 'Academic Secretary',
-          key: 'academic_secretary',
-          candidates: [
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '' },
-            { name: 'Julyn Divinagracia', image: 'candidate1.jpg', level: '' },
-          ],
-        },
-        {
-          name: 'General Secretary',
-          key: 'general_secretary',
-          candidates: [
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '400' },
-            { name: 'Julyn Divinagracia', image: 'candidate1.jpg', level: '500' },
-          ],
-        },
-        {
-          name: 'Assistant General Secretary',
-          key: 'assistant_general_secretary',
-          candidates: [
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '300' },
-            { name: 'Julyn Divinagracia', image: 'candidate1.jpg', level: '400' },
-            { name: 'David Divinagracia', image: 'candidate1.jpg', level: '500' },
-          ],
-        },
-        {
-          name: 'Financial Secretary',
-          key: 'financial_secretary',
-          candidates: [
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '400' },
-            { name: 'Julyn Divinagracia', image: 'candidate1.jpg', level: '500' },
-          ],
-        },
-        {
-          name: 'Treasurer',
-          key: 'treasurer',
-          candidates: [
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '300' },
-            { name: 'Julyn Divinagracia', image: 'candidate1.jpg', level: '400' },
-            { name: 'David Divinagracia', image: 'candidate1.jpg', level: '500' },
-          ],
-        },
-        {
-          name: 'Public Relations Officer',
-          key: 'public_relations_officer',
-          candidates: [
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '300' },
-            { name: 'Julyn Divinagracia', image: 'candidate1.jpg', level: '400' },
-            { name: 'David Divinagracia', image: 'candidate1.jpg', level: '500' },
-          ],
-        },
-        {
-          name: 'Social Secretary',
-          key: 'social_secretary',
-          candidates: [
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '300' },
-            { name: 'Julyn Divinagracia', image: 'candidate1.jpg', level: '400' },
-            { name: 'David Divinagracia', image: 'candidate1.jpg', level: '500' },
-          ],
-        },
-        {
-          name: 'Sport Secretary',
-          key: 'sport_secretary',
-          candidates: [
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '300' },
-            { name: 'Julyn Divinagracia', image: 'candidate1.jpg', level: '400' },
-            { name: 'David Divinagracia', image: 'candidate1.jpg', level: '500' },
-          ],
-        },
-        {
-          name: 'NIMELSSA Senate 200 Level',
-          key: 'senate_200',
-          candidates: [
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '200' },
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '300' },
-            { name: 'Julyn Divinagracia', image: 'candidate1.jpg', level: '400' },
-            { name: 'David Divinagracia', image: 'candidate1.jpg', level: '500' },
-          ],
-        },
-        {
-          name: 'NIMELSSA Senate 300 Level',
-          key: 'senate_300',
-          candidates: [
-              { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '200' },
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '300' },
-            { name: 'Julyn Divinagracia', image: 'candidate1.jpg', level: '400' },
-            { name: 'David Divinagracia', image: 'candidate1.jpg', level: '500' },
-          ],
-        },
-        {
-          name: 'NIMELSSA Senate 400 Level',
-          key: 'senate_400',
-          candidates: [
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '200' },
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '300' },
-            { name: 'Julyn Divinagracia', image: 'candidate1.jpg', level: '400' },
-            { name: 'David Divinagracia', image: 'candidate1.jpg', level: '500' },
-          ],
-        },
-        {
-          name: 'NIMELSSA Senate 500 Level',
-          key: 'senate_500',
-          candidates: [
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '200' },
-            { name: 'Gemalyn Cepe', image: 'candidate2.jpg', level: '300' },
-            { name: 'Julyn Divinagracia', image: 'candidate1.jpg', level: '400' },
-            { name: 'David Divinagracia', image: 'candidate1.jpg', level: '500' },
-          ],
-        },
-        // Add other roles here
-      ],
+      submitting: false,
+      deviceId: "",
+      candidatesList: [],
       votes: {
-        president: '',
-        vice_president: '',
-        academic_secretary: '',
-        general_secretary: '',
-        assistant_general_secretary: '',
-        financial_secretary: '',
-        treasurer: '',
-        public_relations_officer: '',
-        sport_secretary: '',
-        senate_200: '',
-        senate_300: '',
-        senate_400: '',
-        senate_500: '',
+        president: "",
+        vice_president: "",
+        academic_secretary: "",
+        general_secretary: "",
+        assistant_general_secretary: "",
+        public_relations_officer: "",
+        sport_secretary: "",
+        senate_200: [],
+        senate_300: [],
+        senate_400: [],
+        senate_500: [],
       },
-      matricNumber: '', // This should be set appropriately, perhaps through authentication
+      matricNumber: "",
     };
+  },
+  computed: {
+    isFormValid() {
+      return (
+        this.votes.president ||
+        this.votes.vice_president ||
+        this.votes.academic_secretary ||
+        this.votes.general_secretary ||
+        this.votes.assistant_general_secretary ||
+        this.votes.public_relations_officer ||
+        this.votes.sport_secretary ||
+        (this.votes.senate_200.length === 3 || this.votes.senate_200.length === 0) ||
+        (this.votes.senate_300.length === 3 || this.votes.senate_300.length === 0) ||
+        (this.votes.senate_400.length === 3 || this.votes.senate_400.length === 0) ||
+        (this.votes.senate_500.length === 3 || this.votes.senate_500.length === 0)
+      );
+    },
   },
   methods: {
     submitVotes() {
       const payload = {
-        matricNumber: this.matricNumber,
+        deviceId: this.deviceId,
         votes: this.votes,
+      };
+      this.submitting = true;
+      this.$axios
+        .post(
+          "https://nimelssa-elections-backend.onrender.com/api/election/submitVote",
+          payload
+        )
+        .then((response) => {
+          // this.showSuccessModal = true;
+          this.$toastr.s(response?.data?.message || 'Your vote was submitted successfully.');
+          this.$router.push('/election/voting-categories')
+          this.submitting = false;
+        })
+        .catch((error) => {
+          this.$toastr.e(error?.response?.data?.error || 'Something went wrong!');
+        }).finally(() => {
+          this.submitting = false;
+        })
+    },
+    fetchCandidates() {
+      this.processing = true;
+      this.$axios
+        .get(
+          "https://nimelssa-elections-backend.onrender.com/api/candidate/all-candidates"
+        )
+        .then((res) => {
+          const backendCandidates = res.data; // Assuming the candidates data is within `data`
+          this.candidatesList = this.mapCandidatesToRoles(backendCandidates);
+        })
+        .catch((error) => {
+          // this.$toastr.e(error.response.data.message);
+        })
+        .finally(() => {
+          this.processing = false;
+        });
+    },
+    mapCandidatesToRoles(candidates) {
+      const rolesMap = {
+        PRESIDENT: "president",
+        VICE_PRESIDENT: "vice_president",
+        SPORT_SECRETARY: "sport_secretary",
+        ACADEMIC_SECRETARY: "academic_secretary",
+        GENERAL_SECRETARY: "general_secretary",
+        ASSISTANT_GENERAL_SECRETARY: "assistant_general_secretary",
+        PUBLIC_RELATIONS_OFFICER: "public_relations_officer",
+        SOCIAL_SECRETARY: "social_secretary",
+        SENATE_200: "senate_200",
+        SENATE_300: "senate_300",
+        SENATE_400: "senate_400",
+        SENATE_500: "senate_500",
+        // FINANCIAL_SECRETARY: "financial_secretary",
+        // TREASURER: "treasurer",
+        // Add other positions if necessary
+      };
+
+      const roles = [];
+
+      // Initialize roles with empty candidates array
+      Object.keys(rolesMap).forEach((position) => {
+        roles.push({
+          name: position.replace("_", " "), // Format the position name for display
+          key: rolesMap[position],
+          candidates: [],
+        });
+      });
+
+      // Assign candidates to their corresponding role
+      candidates.forEach((candidate) => {
+        const role = roles.find(
+          (role) => role.key === rolesMap[candidate.position]
+        );
+        if (role) {
+          role.candidates.push({
+            id: candidate._id, // Include the '_id' from the backend response
+            name: candidate.name,
+            image: candidate.image,
+            level: candidate.level,
+            quote: candidate.quote, // Include the 'quote' if needed
+            cloudinary_id: candidate.cloudinary_id, // Include 'cloudinary_id' if needed
+          });
+        }
+      });
+
+      return roles;
+    },
+    toggleSenateSelection(roleKey, candidateId) {
+      if (this.votes[roleKey].length === 0) {
+        this.votes[roleKey] = []; // Clear the array if the user previously withheld the vote
       }
-      this.showSuccessModal = true;
-      // console.log(payload, 'payload here')
-      // this.$axios.post('/api/vote', payload).then(response => {
-      //   // Handle success
-      //   this.showSuccessModal = true;
-      // }).catch(error => {
-      //   // Handle error
-      //   console.error(error)
-      //   alert('An error occurred while submitting your vote.')
-      // })
+      const selectedCandidates = this.votes[roleKey];
+      const index = selectedCandidates.indexOf(candidateId);
+
+      if (index > -1) {
+        // If the candidate is already selected, remove them
+        selectedCandidates.splice(index, 1);
+      } else if (selectedCandidates.length < 3) {
+        // If less than 3 candidates are selected, add the new candidate
+        selectedCandidates.push(candidateId);
+      }
+    },
+    withholdSenateVote(roleKey) {
+      this.votes[roleKey] = []; // Clear the array to indicate vote withholding
     },
   },
   components: {
     SuccessModal,
+  },
+  async mounted() {
+    this.fetchCandidates();
+    this.deviceId = await this.$getDeviceId();
   },
 };
 </script>

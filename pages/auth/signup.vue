@@ -89,6 +89,7 @@
                 id="firstname"
                 v-model="form.firstname"
                 type="text"
+                :disabled="processing"
                 name="firstname"
                 class="mt-1 w-full rounded-md focus-within:border-green-500 border-gray-200 py-3 border outline-none px-3 bg-white text-sm text-gray-700 shadow-sm"
               />
@@ -102,6 +103,7 @@
                 id="lastname"
                 v-model="form.lastname"
                 type="text"
+                :disabled="processing"
                 name="lastname"
                 class="mt-1 w-full rounded-md border-gray-200 py-3 border outline-none px-3 bg-white text-sm text-gray-700 shadow-sm"
               />
@@ -117,10 +119,14 @@
               <input
                 id="Matric"
                 v-model="form.matric"
-                type="matric"
+                @input="validateMatricNumber"
+                :class="{'border-red-500': !isMatricValid && isTyping, 'border-gray-300': isMatricValid || !isTyping}"
+                type="number"
+                :disabled="processing"
                 name="Matric"
                 class="mt-1 w-full rounded-md border-gray-200 py-3 border outline-none px-3 bg-white text-sm text-gray-700 shadow-sm"
               />
+              <p v-if="!isMatricValid && isTyping" class="mt-1 text-sm text-red-500">Invalid matric number</p>
             </div>
 
             <div class="col-span-6 w-full">
@@ -135,6 +141,7 @@
                 id="Email"
                 v-model="form.email"
                 type="email"
+                :disabled="processing"
                 name="Email"
                 class="mt-1 w-full rounded-md border-gray-200 py-3 border outline-none px-3 bg-white text-sm text-gray-700 shadow-sm"
               />
@@ -149,6 +156,7 @@
               </label>
               <select
                 name="level"
+                :disabled="processing"
                 id="level"
                 class="mt-1 w-full rounded-md border-gray-200 py-3 border outline-none px-3 bg-white text-sm text-gray-700 shadow-sm"
                 v-model="form.level"
@@ -173,6 +181,7 @@
                 v-model="form.password"
                 :type="showPassword ? 'text' : 'password'"
                 name="password"
+                :disabled="processing"
                 class="mt-1 w-full rounded-md border-gray-200 py-3 border outline-none px-3 bg-white text-sm text-gray-700 shadow-sm"
               />
               <img
@@ -212,6 +221,7 @@ export default {
     return {
       processing: false,
       showPassword: false,
+      isTyping: false,
       form: {
         firstname: "",
         lastname: "",
@@ -230,14 +240,20 @@ export default {
         this.form.matric &&
         this.form.level &&
         this.form.email &&
-        this.form.password
+        this.form.password && this.isMatricValid
       );
     },
     eye() {
       return !this.showPassword ? "eye-close.svg" : "eye-open.svg";
     },
+    isMatricValid() {
+      return /^\d{9}$/.test(this.form.matric);
+    }
   },
   methods: {
+    validateMatricNumber() {
+      this.isTyping = true;
+    },
     handleSignup() {
       this.processing = true;
       this.$axios.post('https://nimelssa-elections-backend.onrender.com/api/auth/register', this.form)
@@ -247,7 +263,8 @@ export default {
     })
     .catch((error) => {
       // this.errorMessage = error && error?.response?.data?.error
-      this.$toastr.e(this.errorMessage)
+      // this.$toastr.e(this.errorMessage)
+      this.$toastr.e(error.response.data.message);
     })
     .finally(() => {
       this.processing = false
