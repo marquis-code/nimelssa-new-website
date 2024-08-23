@@ -142,7 +142,7 @@
         <p><strong>Level:</strong> {{ selectedCandidate.level }}</p>
         <p><strong>Party:</strong> {{ selectedCandidate.party }}</p>
         <p><strong>Role:</strong> {{ selectedCandidate.role }}</p>
-        <p><strong>Hash Tag:</strong> {{ selectedCandidate.hashTag }}</p>
+        <!-- <p><strong>Hash Tag:</strong> {{ selectedCandidate.hashTag }}</p> -->
       </div>
     </Modal>
   </main>
@@ -212,10 +212,10 @@ export default {
     },
     mapLevelToParty(level){
       const levelMap = {
-        "200": 'Xanthrons',
-        "300": 'Phronesis',
-        "400": 'Nobilis',
-        "500": 'Sui Generis'
+        "200": 'Xanthrons Clan',
+        "300": 'Phronesis Clan',
+        "400": 'Nobilis Clan',
+        "500": 'Sui Generis Clan'
       }
       return levelMap[level] || level
     }

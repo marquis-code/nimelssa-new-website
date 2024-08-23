@@ -1,6 +1,6 @@
 export default function ({ $axios, redirect }) {
   $axios.onRequest(config => {
-    const token = localStorage.getItem('accessToken');
+    const token = JSON.parse(localStorage.getItem('accessToken'));
 
     if (token) {
       config.headers.common['Authorization'] = `Bearer ${token}`;

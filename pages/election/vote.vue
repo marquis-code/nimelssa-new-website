@@ -64,13 +64,14 @@
               :key="role.key"
               class="mb-8"
             >
-              <h2 class="text-base lg:text-lg text-gray-900 font-bold">{{ role.name }}</h2>
-              <p class="mb-4 text-sm">
-                Select {{ role.key.startsWith('senate') ? 'up to 3' : 'only one' }} candidate or withhold your vote
+            <!-- {{role}} -->
+              <h2 v-if="role.candidates.length" class="text-base lg:text-lg text-gray-900 font-bold">{{ role.name }}</h2>
+              <p v-if="role.candidates.length" class="mb-4 text-sm">
+                Select {{ role.key.startsWith('senate') ? 'up to 3' : 'only one' }} candidate or withold your vote
               </p>
 
               <div
-                v-if="role.key.startsWith('senate')"
+                v-if="role.key.startsWith('senate') && role.candidates.length"
               >
                 <!-- Candidate Selection -->
                 <div
@@ -89,7 +90,7 @@
                       :value="candidate.id"
                       :checked="votes[role.key].includes(candidate.id)"
                       :id="candidate.id"
-                      class="mr-4 h-6 w-6"
+                      class="mr-4 h-5 w-5"
                     />
                     <img
                       :src="candidate.image"
@@ -105,7 +106,8 @@
                   </label>
                 </div>
                 <!-- Withhold Vote Option -->
-                <div class="flex items-center mb-4">
+                <!-- {{ role }} -->
+                <div class="flex items-center mb-4" v-if="role.key.startsWith('senate') && role.candidates.length" >
                   <label
                     :for="role.key + '-withhold'"
                     class="flex cursor-pointer justify-between gap-4 w-full rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200"
@@ -117,10 +119,10 @@
                       value=""
                       v-model="votes[role.key]"
                       :id="role.key + '-withhold'"
-                      class="mr-4 h-10 w-10"
+                      class="mr-4 h-8 w-8"
                     />
                     <div>
-                      <h3 class="font-semibold">Withhold Vote</h3>
+                      <h3 class="font-semibold">Withold Vote</h3>
                       <p class="text-sm font-medium text-gray-700">
                         Choose this option if you do not want to vote for any candidate in this category.
                       </p>
@@ -131,7 +133,7 @@
 
               <!-- Single choice for non-senate roles -->
               <div
-              v-if="!role.key.startsWith('senate')"
+                v-if="!role.key.startsWith('senate') && role.candidates.length"
                 v-for="candidate in role.candidates"
                 :key="candidate.id"
                 class="flex items-center mb-4"
@@ -147,7 +149,7 @@
                     :value="candidate.id"
                     v-model="votes[role.key]"
                     :id="candidate.id"
-                    class="mr-4 h-6 w-6"
+                    class="mr-4 h-5 w-5"
                   />
                   <img
                     :src="candidate.image"
@@ -164,7 +166,7 @@
               </div>
 
               <!-- Withhold Vote Option for non-senate roles -->
-              <div v-if="!role.key.startsWith('senate')" class="flex items-center mb-4">
+              <div v-if="!role.key.startsWith('senate') && role.candidates.length" class="flex items-center mb-4">
                 <label
                   :for="role.key + '-withhold'"
                   class="flex cursor-pointer justify-between gap-4 w-full rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200"
@@ -176,10 +178,10 @@
                     value=""
                     v-model="votes[role.key]"
                     :id="role.key + '-withhold'"
-                    class="mr-4 h-10 w-10"
+                    class="mr-4 h-8 w-8"
                   />
                   <div>
-                    <h3 class="font-semibold">Withhold Vote</h3>
+                    <h3 class="font-semibold">Withold Vote</h3>
                     <p class="text-sm font-medium text-gray-700">
                       Choose this option if you do not want to vote for any candidate in this category.
                     </p>
@@ -282,11 +284,15 @@ export default {
     },
     fetchCandidates() {
       this.processing = true;
+       // Get the user's level from local storage
+      const userLevel = JSON.parse(localStorage.getItem('user'))
+      console.log(userLevel, 'Level here') // Adjust the key based on how you store it
       this.$axios
         .get(
-          "https://nimelssa-elections-backend.onrender.com/api/candidate/all-candidates"
+          `https://nimelssa-elections-backend.onrender.com/api/candidate/level-candidates?level=${String(userLevel.level)}`
         )
         .then((res) => {
+          console.log(res.data, 'here')
           const backendCandidates = res.data; // Assuming the candidates data is within `data`
           this.candidatesList = this.mapCandidatesToRoles(backendCandidates);
         })
@@ -311,8 +317,8 @@ export default {
         SENATE_300: "senate_300",
         SENATE_400: "senate_400",
         SENATE_500: "senate_500",
-        // FINANCIAL_SECRETARY: "financial_secretary",
-        // TREASURER: "treasurer",
+        FINANCIAL_SECRETARY: "financial_secretary",
+        TREASURER: "treasurer",
         // Add other positions if necessary
       };
 

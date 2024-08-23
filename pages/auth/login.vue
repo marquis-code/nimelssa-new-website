@@ -211,8 +211,8 @@ export default {
           console.log(res?.data, 'data')
           // this.showSuccessModal = true;
           this.$toastr.s('Login was successful')
-          localStorage.setItem('accessToken', res.data.token);
-          localStorage.setItem('user', res.data.user);
+          localStorage.setItem('accessToken', JSON.stringify(res.data.token));
+          localStorage.setItem('user', JSON.stringify(res.data.user));
           this.$router.push('/election/voting-categories')
         })
         .catch((error) => {
