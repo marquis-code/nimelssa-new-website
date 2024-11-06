@@ -410,7 +410,7 @@ export default {
           </div>
 
           <!-- Proceed to Vote Button -->
-          <!-- <div class="flex justify-center items-center flex-col mt-10">
+          <div class="flex justify-center items-center flex-col mt-10">
             <button
               :disabled="!isVotingWindow"
               @click="proceedToVote"
@@ -420,10 +420,10 @@ export default {
               Proceed To Vote
             </button>
             <p v-if="!isVotingWindow" class="mt-4 text-red-500">
-              Voting is only open on Wednesday, 6th November 2024, between 9 AM and 5 PM.
+              Voting is only open on Wednesday, 6th November 2024, between 11 AM and 7 PM.
             </p>
-          </div> -->
-          <div class="flex justify-center items-center flex-col mt-10">
+          </div>
+          <!-- <div class="flex justify-center items-center flex-col mt-10">
             <button
               @click="proceedToVote"
               class="text-white bg-black rounded-lg px-6 py-3.5 w-full"
@@ -433,7 +433,7 @@ export default {
             <p v-if="!isVotingWindow" class="mt-4 text-red-500">
               Voting is only open on Wednesday, 6th November 2024, between 9 AM and 5 PM.
             </p>
-          </div>
+          </div> -->
         </main>
       </div>
     </section>
@@ -471,8 +471,8 @@ export default {
       selectedCandidate: null,
       showModal: false,
       votingDate: new Date('2024-11-06'),
-      startHour: 9,  // Voting opens at 9 AM
-      endHour: 17,   // Voting closes at 5 PM
+      startHour: 11,  // Voting opens at 11 AM
+      endHour: 19,   // Voting closes at 7 PM
     };
   },
   methods: {

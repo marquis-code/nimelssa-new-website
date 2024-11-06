@@ -52,9 +52,9 @@
               <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                 Electoral Candidates (#NIMELSSADECIDES2024)
               </h2>
-              <p class="mt-1 text-sm lg:text-lg font-extrabold leading-8 text-gray-900">
-                Voting Begins: 4 days 14hrs 11mins 52seconds
-              </p>
+              <!-- <p class="mt-1 text-sm lg:text-lg font-extrabold leading-8 text-gray-900">
+                Voting Begins: t
+              </p> -->
             </div>
           
           </div>
