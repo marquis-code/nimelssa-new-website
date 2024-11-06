@@ -512,14 +512,28 @@ export default {
 
       const roles = [];
 
-      // Initialize roles with empty candidates array
-      Object.keys(rolesMap).forEach((position) => {
-        roles.push({
-          name: position.replace("_", " "), // Format the position name for display
-          key: rolesMap[position],
-          candidates: [],
+      // // Initialize roles with empty candidates array
+      // Object.keys(rolesMap).forEach((position) => {
+      //   roles.push({
+      //     name: position.replace("_", " "), // Format the position name for display
+      //     key: rolesMap[position],
+      //     candidates: [],
+      //   });
+      // });
+
+        // Initialize roles with empty candidates array
+        Object.keys(rolesMap).forEach((position) => {
+          // Skip adding 'WELFARE_SECRETARY' and 'FINANCIAL_SECRETARY' for level 200 users
+          if (this.userLevel.level === 200 && (position === "WELFARE_SECRETARY" || position === "FINANCIAL_SECRETARY")) {
+            return;
+          }
+          
+          roles.push({
+            name: position.replace("_", " "), // Format the position name for display
+            key: rolesMap[position],
+            candidates: [],
+          });
         });
-      });
 
       // Assign candidates to their corresponding role
       candidates.forEach((candidate) => {
