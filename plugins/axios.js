@@ -13,7 +13,7 @@ export default function ({ $axios, redirect }) {
     const code = parseInt(error.response && error.response.status);
 
     if (code === 401) {
-      redirect('/login');
+      redirect('/auth/login');
     }
   });
 }
