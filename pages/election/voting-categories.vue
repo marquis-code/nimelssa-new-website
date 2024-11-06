@@ -410,12 +410,23 @@ export default {
           </div>
 
           <!-- Proceed to Vote Button -->
-          <div class="flex justify-center items-center flex-col mt-10">
+          <!-- <div class="flex justify-center items-center flex-col mt-10">
             <button
               :disabled="!isVotingWindow"
               @click="proceedToVote"
               class="text-white bg-black rounded-lg px-6 py-3.5 w-full"
               :class="{ 'opacity-50 cursor-not-allowed': !isVotingWindow }"
+            >
+              Proceed To Vote
+            </button>
+            <p v-if="!isVotingWindow" class="mt-4 text-red-500">
+              Voting is only open on Wednesday, 6th November 2024, between 9 AM and 5 PM.
+            </p>
+          </div> -->
+          <div class="flex justify-center items-center flex-col mt-10">
+            <button
+              @click="proceedToVote"
+              class="text-white bg-black rounded-lg px-6 py-3.5 w-full"
             >
               Proceed To Vote
             </button>
@@ -497,18 +508,30 @@ export default {
     },
     mapRoleToRoleName(position) {
       const roleMap = {
-        PRESIDENT: 'President',
-        TREASURER: 'Treasurer',
-        // Add more mappings as necessary
+        PRESIDENT: "President",
+        VICE_PRESIDENT: "Vice President",
+        SPORT_SECRETARY: "Sport Secretary",
+        ACADEMIC_SECRETARY: "Academic Secretary",
+        GENERAL_SECRETARY: "General Secretary",
+        ASSISTANT_GENERAL_SECRETARY: "Assistant General Secretary",
+        PUBLIC_RELATIONS_OFFICER: "Public Relations Officer",
+        SOCIAL_SECRETARY: "Social Secretary",
+        SENATE_200: "Senate 200",
+        SENATE_300: "Senate 300",
+        SENATE_400: "Senate 400",
+        SENATE_500: "Senate 500",
+        FINANCIAL_SECRETARY: "Financial Secretary",
+        WELFARE_SECRETARY: "Welfare Secretary",
+        TREASURER: "Treasurer"
       };
       return roleMap[position] || position;
     },
     mapLevelToParty(level) {
       const levelMap = {
-        "200": 'Xanthrons Clan',
-        "300": 'Phronesis Clan',
-        "400": 'Nobilis Clan',
-        "500": 'Sui Generis Clan',
+        "200": 'Sentinels Clan',
+        "300": 'Xanthrons Clan',
+        "400": 'Phronesis Clan',
+        "500": 'Nobilis Clan'
       };
       return levelMap[level] || level;
     },
