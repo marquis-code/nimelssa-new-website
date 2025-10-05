@@ -62,7 +62,7 @@
           </div>
 
           <!-- Info Banner for Returning Students -->
-          <div class="mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-4 shadow-sm">
+          <!-- <div class="mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-4 shadow-sm">
             <div class="flex items-start space-x-3">
               <div class="flex-shrink-0">
                 <svg class="w-6 h-6 text-blue-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
@@ -80,7 +80,7 @@
                 </button>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <!-- Login Form Card -->
           <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 sm:p-8">
