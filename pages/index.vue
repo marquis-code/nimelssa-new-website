@@ -1,566 +1,454 @@
 <template>
   <main class="">
-    <SketchBoard />
-    <!-- <div class="bg-black px-4 py-3 text-white">
-      <div
-        class="md:flex justify-center items-center space-y-3 md:space-y-0 gap-x-3 text-white"
-        v-if="timeRemaining > 0"
-      >
-        <p class="text-xs md:text-sm">🔥 Count down to Induction:</p>
-        <div class="flex justify-center items-center gap-x-3 text-white">
-          <p
-            class="text-white font-black text-xs md:text-sm flex items-center gap-x-2"
-          >
-            {{ weeks }} Weeks
-          </p>
-          <p
-            class="text-white font-black text-xs md:text-sm flex items-center gap-x-2"
-          >
-            {{ days }} Days
-          </p>
-          <p
-            class="text-white font-black text-xs md:text-sm flex items-center gap-x-2"
-          >
-            {{ hours }} Hours
-          </p>
-          <p
-            class="text-white font-black text-xs md:text-sm flex items-center gap-x-2"
-          >
-            {{ minutes }} Minutes
-          </p>
-          <p
-            class="text-white font-black text-xs md:text-sm flex items-center gap-x-2"
-          >
-            {{ seconds }} Seconds 🔥
-          </p>
-        </div>
-      </div>
-      <div v-else>
-        <p class="text-white text-sm hidden">Countdown has ended!</p>
-      </div>
-    </div> -->
-    <div
-      class="animate__animated animate__rotateIn bg-gray-100 lg:text-2xl leading-relaxed tracking-wider p-6 lg:p-10 lg:px-20"
-    >
-      <span class="font-bold text-gray-900"
-        >The Nigerian Medical Laboratory Science Students Association (NIMELSSA)
-      </span>
-      is the student body Association of the department of Medical Laboratory
-      Science and is one of the departments of the University of Lagos (UNILAG)
-      under the College of Medicine.
-    </div>
-    <section class="md:my-10">
-      <div class="text-center mb-10">
-        <h1
-          class="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4"
-        >
-          Our Activities
-        </h1>
-        <div class="flex mt-6 justify-center">
-          <div class="w-16 h-1 rounded-full bg-indigo-500 inline-flex"></div>
-        </div>
-      </div>
-      <ssr-carousel loop :slides-per-page="1" :autoplay-delay="3">
-        <section
-          class="bg-cover bg-top bg-no-repeat relative"
-          v-for="(itm, idx) in carousels"
-          :key="idx"
-        >
-          <img
-            :src="require(`@/assets/images/${itm.img}`)"
-            alt=""
-            class="h-[800px] w-full object-center object-cover"
-          />
-          <div class="absolute inset-0 bg-black/75"></div>
-        </section>
-      </ssr-carousel>
-    </section>
-    <!-- <div>
-      <LatestProducts />
-    </div> -->
+             <SketchBoard />
 
-    <section class="py-10">
+    <!-- Association Intro Banner -->
+    <div class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 py-16 px-4 sm:px-6 lg:px-20">
+      <div class="absolute inset-0 bg-black/10"></div>
+      <div class="relative z-10 max-w-6xl mx-auto">
+        <p class="text-lg sm:text-xl lg:text-2xl leading-relaxed text-white text-center lg:text-left animate-fade-in">
+          <span class="font-bold text-blue-100">The Nigerian Medical Laboratory Science Students Association (NIMELSSA)</span>
+          is the student body Association of the department of Medical Laboratory Science and is one of the departments of the University of Lagos (UNILAG) under the College of Medicine.
+        </p>
+      </div>
+      <!-- Decorative elements -->
+      <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-300/10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Activities Carousel Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Our Activities</h2>
+          <div class="flex justify-center">
+            <div class="w-20 h-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600"></div>
+          </div>
+          <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Explore the vibrant community life and activities at NIMELSSA</p>
+        </div>
+
+        <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+          <ssr-carousel loop :slides-per-page="1" :autoplay-delay="3">
+            <section
+              v-for="(itm, idx) in carousels"
+              :key="idx"
+              class="relative h-96 sm:h-[500px] lg:h-[600px]"
+            >
+              <img
+                :src="require(`@/assets/images/${itm.img}`)"
+                alt="NIMELSSA Activity"
+                class="w-full h-full object-cover object-center"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+            </section>
+          </ssr-carousel>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section class="py-16 bg-white">
       <upcoming-events />
     </section>
 
-    <section class="hidden">
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/yGLAGdjMCDQ?si=iyYJobRb0rnlp3_Y"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-      ></iframe>
+    <!-- Classes Section -->
+    <section class="py-16 bg-gray-50">
+      <our-classes />
     </section>
 
-    <section>
-      <our-classes></our-classes>
-    </section>
+    <!-- Build Skills Section -->
+    <section class="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div class="absolute inset-0">
+        <img
+          src="@/assets/images/extra3.jpg"
+          alt="Background"
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/80"></div>
+      </div>
 
-    <section
-      class="bg-[url('@/assets/images/extra3.jpg')] bg-cover bg-top bg-no-repeat relative py-20"
-    >
-      <div class="absolute inset-0 bg-black/30"></div>
-      <h1
-        class="lg:text-8xl lg:max-w-7xl text-3xl font-semibold leading-loose tracking-wider lg:px-20 text-center md:text-left"
-        data-aos="flip-left"
-      >
-        BUILD THE SKILLS
-      </h1>
-      <p
-        class="text-xl text-justify md:text-2xl leading-loose text-gray-900 tracking-wider p-6 md:p-10 lg:px-20"
-        data-aos="flip-left"
-      >
-        Building skills as a medical laboratory science student involves
-        mastering technical procedures, honing analytical thinking, and
-        developing strong attention to detail. Effective communication, time
-        management, and adherence to safety protocols are crucial. Continuous
-        learning and staying updated on advancements in the field are essential,
-        along with fostering interpersonal and teamwork skills. These skills
-        collectively contribute to success in a fast-paced and demanding
-        laboratory environment, ensuring accurate and timely diagnostic results
-        for patient care.
-      </p>
-      <div class="px-20" data-aos="flip-left">
+      <div class="relative z-10 max-w-7xl mx-auto">
+        <h2 class="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-8 leading-tight" data-aos="fade-up">
+          BUILD THE <span class="text-blue-400">SKILLS</span>
+        </h2>
+        
+        <p class="text-base sm:text-lg lg:text-xl text-gray-200 max-w-4xl mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+          Building skills as a medical laboratory science student involves mastering technical procedures, honing analytical thinking, and developing strong attention to detail. Effective communication, time management, and adherence to safety protocols are crucial. Continuous learning and staying updated on advancements in the field are essential, along with fostering interpersonal and teamwork skills.
+        </p>
+
         <button
-          class="bg-black text-white uppercase flex items-center gap-x-2 py-3 px-6"
+          class="group inline-flex items-center space-x-3 bg-white text-gray-900 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+          data-aos="fade-up"
+          data-aos-delay="400"
         >
-          <p>How we do it</p>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="29"
-            height="29"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#ffffff"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M5 12h13M12 5l7 7-7 7" />
+          <span>How We Do It</span>
+          <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
           </svg>
         </button>
       </div>
     </section>
 
-    <section
-      class="bg-[url('@/assets/images/shapes.jpg')] bg-cover bg-top bg-no-repeat relative py-20"
-    >
-      <div class="absolute inset-0 bg-black/30"></div>
-      <h1
-        data-aos="zoom-in-up"
-        class="lg:text-8xl lg:max-w-7xl text-3xl font-semibold leading-loose tracking-wider lg:px-20 text-center md:text-left"
-      >
-        BUILD YOURSELF
-      </h1>
-      <p
-        class="text-xl text-justify md:text-2xl leading-loose text-black tracking-wider p-6 md:p-10 lg:px-20"
-        data-aos="flip-left"
-      >
-        Embark on the journey of self-building with unwavering determination and
-        a positive mindset. Embrace challenges as stepping stones, learn from
-        failures as lessons, and celebrate successes as milestones. Cultivate
-        resilience, set ambitious goals, and continuously strive for personal
-        growth. Fuel your journey with passion, curiosity, and a relentless
-        commitment to becoming the best version of yourself. Remember, the
-        process is as valuable as the destination, so enjoy the transformative
-        ride of self-discovery and improvement. Your potential knows no bounds –
-        build the resilient, empowered, and remarkable individual you aspire to
-        be. The power to shape your destiny lies within you. Go, build the
-        extraordinary you!
-      </p>
-      <div data-aos="zoom-in-up" class="px-20">
+    <!-- Build Yourself Section -->
+    <section class="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div class="absolute inset-0">
+        <img
+          src="@/assets/images/shapes.jpg"
+          alt="Background"
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-l from-purple-900/80 via-blue-900/60 to-purple-900/80"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto">
+        <h2 class="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-8 leading-tight" data-aos="zoom-in">
+          BUILD <span class="text-purple-300">YOURSELF</span>
+        </h2>
+
+        <p class="text-base sm:text-lg lg:text-xl text-gray-200 max-w-4xl mb-12 leading-relaxed" data-aos="fade-up">
+          Embark on the journey of self-building with unwavering determination and a positive mindset. Embrace challenges as stepping stones, learn from failures as lessons, and celebrate successes as milestones. Cultivate resilience, set ambitious goals, and continuously strive for personal growth. Your potential knows no bounds – build the resilient, empowered, and remarkable individual you aspire to be.
+        </p>
+
         <button
-          class="bg-black text-white uppercase flex items-center gap-x-2 py-3 px-6"
+          class="group inline-flex items-center space-x-3 bg-white text-gray-900 hover:bg-purple-600 hover:text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+          data-aos="zoom-in"
         >
-          <p>How we do it</p>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="29"
-            height="29"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#ffffff"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M5 12h13M12 5l7 7-7 7" />
+          <span>How We Do It</span>
+          <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
           </svg>
         </button>
       </div>
     </section>
-    <section
-      class="bg-[url('@/assets/images/shape2.jpg')] bg-cover bg-top bg-no-repeat relative py-20"
-    >
-      <div class="absolute inset-0 bg-black/30"></div>
-      <h1
-        data-aos="zoom-in-up"
-        class="lg:text-8xl lg:max-w-7xl text-3xl font-semibold leading-loose tracking-wider lg:px-20 text-center md:text-left"
-      >
-        BUILD THE WORLD
-      </h1>
-      <p
-        class="text-xl text-justify md:text-2xl leading-loose text-black tracking-wider p-6 md:p-10 lg:px-20"
-        data-aos="flip-left"
-      >
-        Building a world in the context of a medical laboratory science student
-        involves mastering technical skills, enhancing analytical thinking, and
-        developing attention to detail. By prioritizing effective communication,
-        time management, and strict adherence to safety protocols, students can
-        contribute to a reliable and efficient laboratory environment.
-        Continuous learning and staying updated on advancements in the field are
-        key to making a positive impact. Fostering interpersonal and teamwork
-        skills is essential for collaboration within the healthcare community.
-        This comprehensive skill set not only ensures personal success but also
-        contributes to the broader goal of providing accurate and timely
-        diagnostic results, ultimately making a meaningful difference in patient
-        care. This motivation encourages students to work harder to excel in
-        their studies and contribute significantly to the healthcare field.
-      </p>
-      <div data-aos="zoom-in-up" class="px-20">
+
+    <!-- Build the World Section -->
+    <section class="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div class="absolute inset-0">
+        <img
+          src="@/assets/images/shape2.jpg"
+          alt="Background"
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-green-900/80 via-teal-900/60 to-green-900/80"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto">
+        <h2 class="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-8 leading-tight" data-aos="zoom-in">
+          BUILD THE <span class="text-green-300">WORLD</span>
+        </h2>
+
+        <p class="text-base sm:text-lg lg:text-xl text-gray-200 max-w-4xl mb-12 leading-relaxed" data-aos="fade-up">
+          Building a world in the context of a medical laboratory science student involves mastering technical skills, enhancing analytical thinking, and developing attention to detail. This comprehensive skill set not only ensures personal success but also contributes to the broader goal of providing accurate and timely diagnostic results, ultimately making a meaningful difference in patient care.
+        </p>
+
         <button
-          class="bg-black text-white uppercase flex items-center gap-x-2 py-3 px-6"
+          class="group inline-flex items-center space-x-3 bg-white text-gray-900 hover:bg-green-600 hover:text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+          data-aos="zoom-in"
         >
-          <p>How we do it</p>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="29"
-            height="29"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#ffffff"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M5 12h13M12 5l7 7-7 7" />
+          <span>How We Do It</span>
+          <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
           </svg>
         </button>
       </div>
     </section>
-    <section class="mx-auto py-16 space-y-10 md:px-16 px-1">
-      <div class="space-y-6 px-6 md:px-0">
-        <div class="h-1 w-full p-1 rounded-full bg-neutral-800"></div>
-        <div class="space-y-4 md:space-y-0">
-          <h1
-            class="text-4xl font-medium"
-            data-aos="flip-left"
-            data-aos-easing="ease-out-cubic"
-            data-aos-duration="2000"
-          >
-            THIS COULD BE YOU
-          </h1>
-          <P
-            data-aos="flip-left"
-            data-aos-easing="ease-out-cubic"
-            data-aos-duration="2000"
-            class="max-w-xl font-normal leading-relaxed"
-          >
-            NIMELSSA Unilag is an association, which plans and arranges some
-            academic, social, non-academic activities, career fairs, and a
-            Department in the University of Lagos.</P
-          >
+
+    <!-- This Could Be You Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-16 bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="mb-12">
+          <div class="h-1 w-full rounded-full bg-gradient-to-r from-blue-600 to-purple-600 mb-8"></div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4" data-aos="fade-right">
+            THIS COULD BE <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">YOU</span>
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl" data-aos="fade-right" data-aos-delay="200">
+            NIMELSSA Unilag is an association which plans and arranges academic, social, non-academic activities, career fairs, representing a vibrant Department in the University of Lagos.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up">
+          <div class="group">
+            <div class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+              <img
+                src="@/assets/images/user1.jpg"
+                alt="Alumni"
+                class="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-xl font-bold text-gray-900">Paul Sobers</h3>
+              <p class="text-blue-600 font-semibold">Associate Software Engineer</p>
+              <p class="text-gray-600">Interswitch</p>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+              <img
+                src="@/assets/images/user2.jpg"
+                alt="Alumni"
+                class="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-xl font-bold text-gray-900">Stephanie Smith</h3>
+              <p class="text-blue-600 font-semibold">Senior Software Engineer</p>
+              <p class="text-gray-600">Google</p>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+              <img
+                src="@/assets/images/user3.jpg"
+                alt="Alumni"
+                class="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-xl font-bold text-gray-900">Mark Griffith</h3>
+              <p class="text-blue-600 font-semibold">Mobile Engineer</p>
+              <p class="text-gray-600">Amazon</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div
-        data-aos="flip-left"
-        data-aos-easing="ease-out-cubic"
-        data-aos-duration="2000"
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:w-10/12 px-6 md:px-0"
-      >
-        <a href="#" class="block">
-          <img
-            alt="Art"
-            src="@/assets/images/user1.jpg"
-            class="h-64 w-full object-cover sm:h-80 lg:h-96"
-          />
+    </section>
 
-          <h3 class="mt-4 text-lg font-bold text-gray-900 sm:text-xl">
-            Paul Sobers
-          </h3>
-
-          <p class="mt-1 max-w-sm text-gray-700">Associate Software Engineer</p>
-          <p class="mt-1 max-w-sm text-gray-700">Interswitch</p>
-        </a>
-        <a href="#" class="block">
-          <img
-            alt="Art"
-            src="@/assets/images/user2.jpg"
-            class="h-64 w-full object-cover sm:h-80 lg:h-96"
-          />
-
-          <h3 class="mt-4 text-lg font-bold text-gray-900 sm:text-xl">
-            Stephanie Smith
-          </h3>
-
-          <p class="mt-1 max-w-sm text-gray-700">Senior Software Engineer</p>
-          <p class="mt-1 max-w-sm text-gray-700">Goodle</p>
-        </a>
-        <a href="#" class="block">
-          <img
-            alt="Art"
-            src="@/assets/images/user3.jpg"
-            class="h-64 w-full object-cover sm:h-80 lg:h-96"
-          />
-
-          <h3 class="mt-4 text-lg font-bold text-gray-900 sm:text-xl">
-            Mark Griffith
-          </h3>
-
-          <p class="mt-1 max-w-sm text-gray-700">Mobile Engineer</p>
-          <p class="mt-1 max-w-sm text-gray-700">Amazon</p>
-        </a>
+    <!-- Quote Section -->
+    <section class="relative py-20 px-4 sm:px-6 lg:px-20 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400"></div>
+      <div class="absolute inset-0 bg-black/10"></div>
+      
+      <div class="relative z-10 max-w-5xl mx-auto">
+        <blockquote class="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 leading-relaxed text-center italic" data-aos="fade-up">
+          "An unknown profession to some and not so important to many. It's because we just remain quiet and unseen but we see things beyond the capacity of the naked eye and we know the condition of patients without seeing them. We are proud Medical Laboratory Scientists."
+        </blockquote>
+        <p class="mt-8 text-center text-lg font-bold text-gray-800" data-aos="fade-up" data-aos-delay="200">
+          — NIMELSSA Unilag
+        </p>
       </div>
     </section>
-    <section class="bg-yellow-500 px-6 md:px-20 py-32 space-y-8">
-      <h1
-        data-aos="flip-left"
-        data-aos-easing="ease-out-cubic"
-        data-aos-duration="2000"
-        class="md:text-4xl font-semibold text-gray-700 text-xl leading-relaxed tracking-wider md:tracking-widest md:leading-loose"
-      >
-        "An unknown profession to some and not so important to many. It's
-        because we just remain quiet and unseen but we see things beyond the
-        capacity of the naked eye and we know the condition of patients without
-        seeing them. We may not take cate of patients but we care about what's
-        wrong with them. We may not charm doctors but they rely on us. We play
-        an essential part as backbone of the diagnostic team. We are proud
-        Medical Laboratory Scientist. Proud to be one ❤️"
-      </h1>
-      <p class="text-sm font-semibold">NIMELSSA Unilag.</p>
+
+    <!-- Hero Image Section -->
+    <section class="relative h-96 sm:h-[500px] lg:h-[600px] overflow-hidden">
+      <img
+        src="@/assets/images/outreach.jpg"
+        alt="NIMELSSA Outreach"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-black/50"></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white text-center px-4" data-aos="zoom-in">
+          Making A Difference
+        </h2>
+      </div>
     </section>
-    <section
-      class="bg-[url('@/assets/images/outreach.jpg')] bg-cover bg-top bg-no-repeat relative py-[500px]"
-    >
-      <div class="absolute inset-0 bg-black/75"></div>
-    </section>
-    <section class="mx-auto py-16 space-y-10 md:px-16 px-1">
-      <div class="space-y-6 px-6 md:px-0">
-        <div class="h-1 w-full p-1 rounded-full bg-neutral-800"></div>
-        <div class="space-y-4 md:space-y-0">
-          <h1 class="md:text-4xl text-2xl font-medium" data-aos="zoom-in-right">
+
+    <!-- NIMELSSA in the Media -->
+    <section class="py-20 px-4 sm:px-6 lg:px-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto">
+        <div class="mb-12">
+          <div class="h-1 w-full rounded-full bg-gradient-to-r from-blue-600 to-purple-600 mb-8"></div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4" data-aos="fade-right">
             NIMELSSA IN THE MEDIA
-          </h1>
-          <P
-            class="max-w-xl font-normal leading-relaxed"
-            data-aos="zoom-in-right"
-          >
-            NIMELSSA Unilag is an association, which plans and arranges some
-            academic, social, non-academic activities, career fairs, and a
-            Department in the University of Lagos.</P
-          >
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl" data-aos="fade-right" data-aos-delay="200">
+            Stay updated with our latest news, achievements, and community impact stories.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-aos="fade-up">
+          <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
+            <div class="relative h-64 overflow-hidden">
+              <img
+                src="@/assets/images/user1.jpg"
+                alt="News"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg text-gray-900 mb-3 line-clamp-2">
+                Documentary offers empowered approach to dementia and Alzheimer's disease
+              </h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                "Why" is a documentary created that puts forth a positive perspective on the lives of people living with cognitive decline.
+              </p>
+              <p class="text-xs font-semibold text-blue-600">November 21, 2023</p>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
+            <div class="relative h-64 overflow-hidden">
+              <img
+                src="@/assets/images/user2.jpg"
+                alt="News"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg text-gray-900 mb-3 line-clamp-2">
+                KU undergraduate nursing program rises to No. 17 in the nation
+              </h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                KU's Bachelor of Science in Nursing program ranked 23rd among all schools in the 2024 rankings.
+              </p>
+              <p class="text-xs font-semibold text-blue-600">September 19, 2023</p>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
+            <div class="relative h-64 overflow-hidden">
+              <img
+                src="@/assets/images/user3.jpg"
+                alt="News"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg text-gray-900 mb-3 line-clamp-2">
+                Heartland Consortium advances precision medicine research
+              </h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                Part of the National Institutes of Health working to collect data for advanced medical research.
+              </p>
+              <p class="text-xs font-semibold text-blue-600">September 13, 2023</p>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
+            <div class="relative h-64 overflow-hidden">
+              <img
+                src="@/assets/images/outreach.jpg"
+                alt="News"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg text-gray-900 mb-3 line-clamp-2">
+                Rural Kansas Photo Contest accepting entries
+              </h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                Invites entries to highlight the unique beauty of Kansas and its people through photography.
+              </p>
+              <p class="text-xs font-semibold text-blue-600">September 11, 2023</p>
+            </div>
+          </article>
         </div>
       </div>
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-6 md:px-0"
-        data-aos="zoom-in-right"
-      >
-        <a href="#" class="block">
-          <img
-            alt="Art"
-            src="@/assets/images/user1.jpg"
-            class="h-64 w-full object-cover sm:h-80 lg:h-96"
-          />
-
-          <h3
-            class="mt-4 text-sm lg:text-lg font-bold text-gray-900 sm:text-xl"
-          >
-            Documentary offers empowered approach to dementia and Alzheimer’s
-            disease
-          </h3>
-
-          <p class="mt-2 max-w-sm text-gray-700">
-            “Why” is a documentary created by the KU Alzheimer’s Disease
-            Research Center that puts forth a positive perspective on the lives
-            of people living with cognitive decline and dementia.
-          </p>
-          <p class="mt-1 max-w-sm text-sm font-bold text-gray-700">
-            November 21, 2023
-          </p>
-        </a>
-        <a href="#" class="block">
-          <img
-            alt="Art"
-            src="@/assets/images/user2.jpg"
-            class="h-64 w-full object-cover sm:h-80 lg:h-96"
-          />
-
-          <h3
-            class="mt-4 text-sm lg:text-lg font-bold text-gray-900 sm:text-xl"
-          >
-            KU undergraduate nursing program rises to No. 17 in the nation among
-            public schools in U.S. News rankings
-          </h3>
-
-          <p class="mt-2 max-w-sm text-gray-700">
-            KU’s Bachelor of Science in Nursing program also ranked 23rd among
-            all schools in the 2024 “Best Colleges” rankings released by U.S.
-            News & World Report.
-          </p>
-          <p class="mt-1 max-w-sm text-sm font-bold text-gray-700">
-            September 19, 2023
-          </p>
-        </a>
-        <a href="#" class="block">
-          <img
-            alt="Art"
-            src="@/assets/images/user3.jpg"
-            class="h-64 w-full object-cover sm:h-80 lg:h-96"
-          />
-
-          <h3
-            class="mt-4 text-sm lg:text-lg font-bold text-gray-900 sm:text-xl"
-          >
-            KU Medical Center announces four-state Heartland Consortium as part
-            of the All of Us Research Program to advance precision medicine
-          </h3>
-
-          <p class="mt-2 max-w-sm text-gray-700">
-            Part of the National Institutes of Health, the All of Us Research
-            Program is working to collect data from a
-          </p>
-          <p class="mt-1 max-w-sm text-sm font-bold text-gray-700">
-            September 13, 2023
-          </p>
-        </a>
-        <a href="#" class="block">
-          <img
-            alt="Art"
-            src="@/assets/images/outreach.jpg"
-            class="h-64 w-full object-cover sm:h-80 lg:h-96"
-          />
-
-          <h3
-            class="mt-4 text-sm lg:text-lg font-bold text-gray-900 sm:text-xl"
-          >
-            Rural Kansas Photo Contest accepting entries to showcase the state
-          </h3>
-
-          <p class="mt-2 max-w-sm text-gray-700">
-            Rural Health Education and Services at KU Medical Center invites
-            entries to highlight the unique beauty of Kansas and its people
-          </p>
-          <p class="mt-1 max-w-sm text-sm font-bold text-gray-700">
-            September 11, 2023
-          </p>
-        </a>
-      </div>
     </section>
-    <section>
-      <our-entreprenures></our-entreprenures>
+
+    <!-- Entrepreneurs Section -->
+    <section class="py-16 bg-white">
+      <our-entreprenures />
     </section>
-    <section>
+
+    <!-- Sponsors Section -->
+    <section class="py-16 bg-gray-50">
       <SponsorSection />
     </section>
-    <OutGoingTestimonials />
-    <FrequentlyAskedQuestions />
-    <section class="text-gray-600 body-font relative">
-      <div
-        class="container px-5 py-24 mx-auto lg:flex sm:flex-nowrap flex-wrap"
-      >
-        <div
-          class="lg:w-2/3 md:w-1/2 bg-gray-300 w-full rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative"
-        >
-          <iframe
-            width="100%"
-            height="100%"
-            class="absolute inset-0"
-            frameborder="0"
-            title="map"
-            marginheight="0"
-            marginwidth="0"
-            scrolling="no"
-            src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
-            style="filter: grayscale(1) contrast(1.2) opacity(0.4)"
-          ></iframe>
-          <div class="bg-white relative flex flex-wrap py-6 rounded shadow-md">
-            <div class="lg:w-1/2 px-6">
-              <h2
-                class="title-font font-semibold text-gray-900 tracking-widest text-xs"
-              >
-                ADDRESS
-              </h2>
-              <p class="mt-1">
-                College of Medicine of the University of Lagos, Private Mail Bag
-                12003, Lagos, Nigeria.
-              </p>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-white">
+      <OutGoingTestimonials />
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+      <FrequentlyAskedQuestions />
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- Map -->
+          <div class="relative h-96 lg:h-full min-h-[400px] rounded-3xl overflow-hidden shadow-xl">
+            <iframe
+              width="100%"
+              height="100%"
+              class="absolute inset-0"
+              frameborder="0"
+              title="map"
+              scrolling="no"
+              src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=University%20of%20Lagos+(NIMELSSA)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
+              style="filter: grayscale(0.3)"
+            ></iframe>
+            
+            <div class="absolute bottom-4 left-4 right-4 bg-white rounded-2xl shadow-lg p-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <h3 class="font-bold text-gray-900 text-xs uppercase tracking-wider mb-2">Address</h3>
+                  <p class="text-sm text-gray-700">College of Medicine, University of Lagos, Lagos, Nigeria</p>
+                </div>
+                <div>
+                  <h3 class="font-bold text-gray-900 text-xs uppercase tracking-wider mb-2">Email</h3>
+                  <a href="mailto:nimelssaunilag@email.com" class="text-sm text-blue-600 hover:underline">nimelssaunilag@email.com</a>
+                  <h3 class="font-bold text-gray-900 text-xs uppercase tracking-wider mt-3 mb-2">Phone</h3>
+                  <p class="text-sm text-gray-700">123-456-7890</p>
+                </div>
+              </div>
             </div>
-            <div class="lg:w-1/2 px-6 mt-4 lg:mt-0">
-              <h2
-                class="title-font font-semibold text-gray-900 tracking-widest text-xs"
+          </div>
+
+          <!-- Feedback Form -->
+          <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8 shadow-xl">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Send Us Feedback</h2>
+            <p class="text-gray-600 mb-8">Let us know what you think about NIMELSSA</p>
+
+            <form @submit.prevent="handleFeedback" class="space-y-6">
+              <div>
+                <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Name</label>
+                <input
+                  v-model="form.name"
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="w-full rounded-xl border-2 border-gray-200 py-3 px-4 bg-white text-gray-900 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all"
+                  placeholder="Enter your name"
+                />
+              </div>
+
+              <div>
+                <label for="matric" class="block text-sm font-semibold text-gray-700 mb-2">Matric Number</label>
+                <input
+                  v-model="form.matric"
+                  type="number"
+                  id="matric"
+                  name="matric"
+                  class="w-full rounded-xl border-2 border-gray-200 py-3 px-4 bg-white text-gray-900 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all"
+                  placeholder="Enter your matric number"
+                />
+              </div>
+
+              <div>
+                <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+                <textarea
+                  v-model="form.message"
+                  id="message"
+                  name="message"
+                  rows="5"
+                  class="w-full rounded-xl border-2 border-gray-200 py-3 px-4 bg-white text-gray-900 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all resize-none"
+                  placeholder="Share your thoughts..."
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                :disabled="!isFormEmpty || loading"
+                class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                EMAIL
-              </h2>
-              <a class="text-indigo-500 leading-relaxed"
-                >nimelssaunilag@email.com</a
-              >
-              <h2
-                class="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4"
-              >
-                PHONE
-              </h2>
-              <p class="leading-relaxed">123-456-7890</p>
-            </div>
+                {{ loading ? "Sending..." : "Submit Feedback" }}
+              </button>
+            </form>
           </div>
         </div>
-        <form
-          @submit.prevent="handleFeedback"
-          class="lg:w-1/3 md:w-1/2 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0"
-        >
-          <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">
-            Feedback
-          </h2>
-          <p class="leading-relaxed mb-5 text-gray-600">
-            Let us know what you think about NIMELSSA.
-          </p>
-          <div class="relative mb-4">
-            <label for="name" class="leading-7 text-sm text-gray-600"
-              >Name</label
-            >
-            <input
-              v-model="form.name"
-              type="text"
-              id="name"
-              name="name"
-              class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
-          </div>
-          <div class="relative mb-4">
-            <label for="matric" class="leading-7 text-sm text-gray-600"
-              >Matric Number</label
-            >
-            <input
-              v-model="form.matric"
-              type="number"
-              id="email"
-              name="matric"
-              class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
-          </div>
-          <div class="relative mb-4">
-            <label for="message" class="leading-7 text-sm text-gray-600"
-              >Message</label
-            >
-            <textarea
-              id="message"
-              name="message"
-              v-model="form.message"
-              class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-            ></textarea>
-          </div>
-          <button
-            :class="[!isFormEmpty ? 'opacity-25 cursor-not-allowed' : '']"
-            :disabled="!isFormEmpty"
-            class="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none rounded text-lg"
-          >
-            {{ loading ? "processing..." : "Submit" }}
-          </button>
-        </form>
       </div>
-    </section>
+    </section>   
+
     <footer class="bg-gray-100">
       <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <div class="flex justify-center text-teal-600">

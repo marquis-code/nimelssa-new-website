@@ -14,7 +14,7 @@
           <section class="bg-cover bg-top bg-no-repeat relative" v-for="(itm, idx) in carousels" :key="idx">
             <img :src="require(`@/assets/images/${itm.img}`)" alt=""
               class="h-[800px] w-full object-center object-cover" />
-            <div class="absolute inset-0 bg-black/75"></div>
+            <div class="absolute inset-0 bg-black/50"></div>
             <div class="absolute top-60">
               <div class="flex flex-col items-center p-8 py-12 text-center">
                 <span class="text-white font-black">22nd December, 2023</span>
