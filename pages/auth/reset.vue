@@ -124,18 +124,22 @@
                 >
                   OTP
                 </label>
-                <ClientOnly>
-                  <PincodeInput
-                    v-model="form.otp"
+                <div class="flex gap-4 mt-2">
+                  <input
+                    v-for="(digit, index) in otpDigits"
+                    :key="index"
+                    :ref="`otpInput${index}`"
+                    v-model="otpDigits[index]"
+                    @input="handleOtpInput(index, $event)"
+                    @keydown="handleOtpKeydown(index, $event)"
+                    @paste="handleOtpPaste"
+                    type="text"
+                    maxlength="1"
+                    :disabled="processing"
+                    class="h-16 w-16 rounded-full border border-gray-300 text-center text-3xl text-gray-500 focus:border-green-400 focus:shadow outline-none disabled:cursor-not-allowed"
                     placeholder="0"
-                    style="height: 60px; width: 600px"
-                    :length="4"
-                    input-class="h-32 w-32 border border-grey rounded-full text-gray-500 text-3xl focus:shadow"
-                    success-class=" border border-green-400"
-                    spacing-class="mr-10"
-                    autofocus
                   />
-                </ClientOnly>
+                </div>
               </div>
               <div class="w-full">
                 <button
@@ -172,12 +176,8 @@
 </template>
 
 <script>
-import PincodeInput from "vue-pincode-input";
 export default {
   layout: "auth",
-  components: {
-    PincodeInput,
-  },
   data() {
     return {
       processing: false,
@@ -188,6 +188,7 @@ export default {
         newPassword: "",
         otp: "",
       },
+      otpDigits: ["", "", "", ""],
       isTyping: false,
     };
   },
@@ -211,6 +212,70 @@ export default {
     validateMatricNumber() {
       this.isTyping = true;
     },
+    handleOtpInput(index, event) {
+      const value = event.target.value;
+      
+      // Only allow digits
+      if (!/^\d*$/.test(value)) {
+        this.otpDigits[index] = "";
+        return;
+      }
+
+      // Update the digit
+      this.otpDigits[index] = value;
+      
+      // Update form.otp
+      this.form.otp = this.otpDigits.join("");
+
+      // Move to next input if value is entered
+      if (value && index < 3) {
+        const nextInput = this.$refs[`otpInput${index + 1}`];
+        if (nextInput && nextInput[0]) {
+          nextInput[0].focus();
+        }
+      }
+    },
+    handleOtpKeydown(index, event) {
+      // Handle backspace
+      if (event.key === "Backspace" && !this.otpDigits[index] && index > 0) {
+        const prevInput = this.$refs[`otpInput${index - 1}`];
+        if (prevInput && prevInput[0]) {
+          prevInput[0].focus();
+        }
+      }
+      
+      // Handle arrow keys
+      if (event.key === "ArrowLeft" && index > 0) {
+        const prevInput = this.$refs[`otpInput${index - 1}`];
+        if (prevInput && prevInput[0]) {
+          prevInput[0].focus();
+        }
+      }
+      if (event.key === "ArrowRight" && index < 3) {
+        const nextInput = this.$refs[`otpInput${index + 1}`];
+        if (nextInput && nextInput[0]) {
+          nextInput[0].focus();
+        }
+      }
+    },
+    handleOtpPaste(event) {
+      event.preventDefault();
+      const pastedData = event.clipboardData.getData("text").trim();
+      
+      // Only process if it's 4 digits
+      if (/^\d{4}$/.test(pastedData)) {
+        for (let i = 0; i < 4; i++) {
+          this.otpDigits[i] = pastedData[i];
+        }
+        this.form.otp = pastedData;
+        
+        // Focus the last input
+        const lastInput = this.$refs[`otpInput3`];
+        if (lastInput && lastInput[0]) {
+          lastInput[0].focus();
+        }
+      }
+    },
     handleReset() {
       this.processing = true;
       this.$axios
@@ -220,9 +285,7 @@ export default {
         )
         .then((res) => {
           this.showSuccessModal = true;
-          // this.$toastr.s('Login was successful')
           sessionStorage.removeItem('matric')
-          // this.$router.push('/election/voting-categories')
         })
         .catch((error) => {
           console.error(error.response);
@@ -239,6 +302,11 @@ export default {
   },
   mounted() {
     this.fetchMatric();
+    // Auto-focus first OTP input
+    const firstInput = this.$refs.otpInput0;
+    if (firstInput && firstInput[0]) {
+      firstInput[0].focus();
+    }
   },
 };
 </script>

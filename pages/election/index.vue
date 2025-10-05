@@ -159,12 +159,12 @@
                   <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
                   <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
                 </svg>
-                <span class="text-sm font-semibold text-blue-900">#NIMELSSADECIDES{{ new Date().getFullYear()() }}</span>
+                <span class="text-sm font-semibold text-blue-900">#NIMELSSADECIDES{{ new Date().getFullYear() }}</span>
               </div>
 
               <!-- Main Heading -->
               <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl animate-slide-up">
-                Welcome to <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">NIMELSSA</span> E-Voting Platform {{ new Date().getFullYear()() }}
+                Welcome to <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">NIMELSSA</span> E-Voting Platform {{ new Date().getFullYear() }}
               </h1>
 
               <!-- Description -->
