@@ -78,7 +78,7 @@ export default {
 <template>
   <div
     v-if="show"
-    class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 p-4"
+    class="fixed inset-0 z-[9999] backdrop-blur-xl flex items-center justify-center bg-gray-800 bg-opacity-75 p-4"
   >
     <div
       class="bg-white rounded-lg overflow-hidden shadow-xl max-w-md w-full mx-auto"
@@ -97,11 +97,11 @@ export default {
           <img
             src="@/assets/icons/celebration.svg"
             alt="celebration"
-            class="h-32 w-32"
+            class="h-20 w-20"
           />
         </div>
-        <h1 class="text-center text-xl font-semibold">{{ title }}</h1>
-        <p class="text-green-600 font-semibold">{{ desc }}</p>
+        <h1 class="text-center text-lg font-semibold">{{ title }}</h1>
+        <p class="text-green-600 text-sm font-semibold">{{ desc }}</p>
         <!-- <p class="text-lg font-semibold cursor-pointer">{{extra}}</p> -->
         <div v-if="!resetPassword" class="flex justify-center items-center gap-x-3">
           <button class="flex justify-center items-center gap-x-3" @click="copyToClipboard">

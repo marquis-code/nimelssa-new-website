@@ -1,9 +1,9 @@
 <template>
-  <main class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
-    <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
+  <main class="min-h-screen bg-gradient-to-br from-blue-50 via-white  to-indigo-50">
+    <div class="lg:grid lg:min-h-screen lg:grid-cols-12 pt-20 lg:pt-0">
       <!-- Left Section - Hero Image -->
       <section
-        class="relative flex h-48 items-end bg-gradient-to-br from-gray-900 to-blue-900 lg:col-span-5 lg:h-full xl:col-span-6 overflow-hidden"
+        class="relative  hidden lg:flex h-48 items-end bg-gradient-to-br from-gray-900 to-blue-900 lg:col-span-5 lg:h-full xl:col-span-6 overflow-hidden"
       >
         <img
           alt="NIMELSSA Background"
@@ -79,7 +79,7 @@
             <div class="text-center mb-6">
               <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Forgot Password?</h1>
               <p class="text-sm text-gray-600">
-                No worries! We'll send password reset information to your registered email.
+                No worries! We'll send password reset information to you magically ☺️😉
               </p>
             </div>
 
@@ -131,7 +131,7 @@
                   <div class="flex-1">
                     <h4 class="text-sm font-semibold text-blue-900 mb-1">What happens next?</h4>
                     <p class="text-xs text-blue-700">
-                      We'll send a 4-digit OTP to your registered email address. Use this code to reset your password securely.
+                      We'll send a 4-digit OTP to you magically ☺️😉 Use this code to reset your password securely.
                     </p>
                   </div>
                 </div>

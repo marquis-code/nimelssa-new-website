@@ -1,9 +1,9 @@
 <template>
-  <main class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
-    <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
+  <main class="min-h-screen bg-gradient-to-br from-blue-50  via-white to-indigo-50">
+    <div class="lg:grid lg:min-h-screen lg:grid-cols-12 pt-20 lg:pt-0">
       <!-- Left Section - Hero Image -->
       <section
-        class="relative flex h-48 items-end bg-gradient-to-br from-gray-900 to-blue-900 lg:col-span-5 lg:h-full xl:col-span-6 overflow-hidden"
+        class="relative hidden lg:flex h-48 items-end bg-gradient-to-br from-gray-900 to-blue-900 lg:col-span-5 lg:h-full xl:col-span-6 overflow-hidden"
       >
         <img
           alt="NIMELSSA Background"
