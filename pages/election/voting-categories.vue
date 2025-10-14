@@ -52,7 +52,7 @@
                 </div>
                 <div>
                   <p class="text-sm font-medium">Voting Date</p>
-                  <p class="text-xs text-blue-300">6th November {{ new Date().getFullYear() }}</p>
+                  <p class="text-xs text-blue-300">20th October, 2025</p>
                 </div>
               </div>
               
@@ -64,7 +64,7 @@
                 </div>
                 <div>
                   <p class="text-sm font-medium">Voting Hours</p>
-                  <p class="text-xs text-purple-300">11:00 AM - 7:00 PM</p>
+                  <p class="text-xs text-purple-300">09:00 AM - 5:00 PM</p>
                 </div>
               </div>
             </div>
@@ -101,7 +101,7 @@
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
                 </svg>
                 <p class="text-sm font-bold text-gray-900">
-                  Voting: 6th November {{ new Date().getFullYear() }}, 11 AM - 7 PM
+                  Voting: 20th October, 2025, 09:00 AM - 05:00PM
                 </p>
               </div>
             </div>
