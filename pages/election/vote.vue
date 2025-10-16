@@ -52,11 +52,19 @@
               <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                 Electoral Candidates (#NIMELSSADECIDES{{ new Date().getFullYear() }})
               </h2>
-              <!-- <p class="mt-1 text-sm lg:text-lg font-extrabold leading-8 text-gray-900">
-                Voting Begins: t
-              </p> -->
+              <div class="mt-3 flex items-center justify-center gap-2">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span>
+                <p class="text-sm lg:text-base font-bold text-green-600">
+                  VOTING IS NOW LIVE
+                </p>
+              </div>
+              <p class="mt-1 text-xs lg:text-sm text-gray-600">
+                Cast your vote now for the {{ new Date().getFullYear() }} NIMELSSA executives
+              </p>
             </div>
-          
           </div>
 
 
@@ -75,7 +83,7 @@
                 <div v-for="candidate in role.candidates" :key="candidate.id" class="flex items-center mb-4">
                   <label
                     :for="candidate.id"
-                    class="flex cursor-pointer justify-between gap-4 w-full rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200"
+                    class="flex cursor-pointer justify-between gap-4 w-full rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200 transition-all"
                     @click="toggleSenateSelection(role.key, candidate.id)"
                   >
                     <input
@@ -98,7 +106,7 @@
                 <div class="flex items-center mb-4">
                   <label
                     :for="role.key + '-withhold'"
-                    class="flex cursor-pointer justify-between gap-4 w-full rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200"
+                    class="flex cursor-pointer justify-between gap-4 w-full rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200 transition-all"
                     @click="withholdSenateVote(role.key)"
                   >
                     <input
@@ -123,7 +131,7 @@
               <div v-if="!role.key.startsWith('senate') && role.candidates.length" v-for="candidate in role.candidates" :key="candidate.id" class="flex items-center mb-4">
                 <label
                   :for="candidate.id"
-                  class="flex cursor-pointer justify-between gap-4 w-full rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200"
+                  class="flex cursor-pointer justify-between gap-4 w-full rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200 transition-all"
                   @click="votes[role.key] = candidate.id"
                 >
                   <input
@@ -146,7 +154,7 @@
               <div v-if="!role.key.startsWith('senate') && role.candidates.length" class="flex items-center mb-4">
                 <label
                   :for="role.key + '-withhold'"
-                  class="flex cursor-pointer justify-between gap-4 w-full rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200"
+                  class="flex cursor-pointer justify-between gap-4 w-full rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200 transition-all"
                   @click="votes[role.key] = ''"
                 >
                   <input
@@ -168,14 +176,27 @@
             </div>
           </div>
 
+          <div v-if="processing" class="flex justify-center items-center py-12">
+            <div class="text-center">
+              <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
+              <p class="mt-4 text-gray-600">Loading candidates...</p>
+            </div>
+          </div>
+
+          <div v-if="!processing && !candidatesList.length" class="flex justify-center items-center py-12">
+            <div class="text-center">
+              <p class="text-gray-600">No candidates available at the moment.</p>
+            </div>
+          </div>
+
      
           <div class="flex justify-center items-center mt-10">
             <button
               type="submit"
               :disabled="submitting"
-              class="text-white disabled:cursor-not-allowed disabled:opacity-25 bg-black rounded-lg px-6 py-3 w-full"
+              class="text-white disabled:cursor-not-allowed disabled:opacity-25 bg-black hover:bg-gray-800 rounded-lg px-6 py-3 w-full font-semibold transition-all"
             >
-              {{ submitting ? "Processing" : "Submit" }}
+              {{ submitting ? "Submitting Your Vote..." : "Submit Vote" }}
             </button>
           </div>
         </form>
@@ -253,43 +274,36 @@ export default {
           payload
         )
         .then((response) => {
-          // this.showSuccessModal = true;
           this.$toastr.s(response?.data?.message || 'Your vote was submitted successfully.');
           this.$router.push('/election/voting-categories')
           this.submitting = false;
         })
         .catch((error) => {
           this.$toastr.e(error?.response?.data?.error || 'Something went wrong!');
-        }).finally(() => {
           this.submitting = false;
-        })
+        });
     },
     fetchCandidates() {
       this.processing = true;
-       // Get the user's level from local storage
-      const userLevel = JSON.parse(localStorage.getItem('user'))
-      userLevel
-      console.log(userLevel, 'Level here') // Adjust the key based on how you store it
+      const userLevel = JSON.parse(localStorage.getItem('user'));
+      this.userLevel = userLevel;
+      
       this.$axios
         .get(
-          // `https://nimelssa-elections-backend.onrender.com/api/candidate/all-candidates`
           `https://nimelssa-elections-backend.onrender.com/api/candidate/level-candidates?level=${String(userLevel.level)}`
         )
         .then((res) => {
-          console.log(res.data, 'here')
-          const backendCandidates = res.data; // Assuming the candidates data is within `data`
-          this.rawCandidates = res.data
+          this.rawCandidates = res.data;
           this.candidatesList = this.mapCandidatesToRoles(res.data);
         })
         .catch((error) => {
-          // this.$toastr.e(error.response.data.message);
+          this.$toastr.e(error?.response?.data?.message || 'Failed to load candidates');
         })
         .finally(() => {
           this.processing = false;
         });
     },
     mapCandidatesToRoles(candidates) {
-      console.log(candidates, 'form map fnx')
       const rolesMap = {
         PRESIDENT: "president",
         VICE_PRESIDENT: "vice_president",
@@ -308,336 +322,59 @@ export default {
         TREASURER: "treasurer",
       };
 
-  const roles = [];
+      const roles = [];
 
-  const userLevel = JSON.parse(localStorage.getItem('user'))
-  // Log the user's level
-  console.log('User Level:', userLevel.level);
-
-  // Initialize roles with empty candidates array, conditionally excluding some for level 200
-  Object.keys(rolesMap).forEach((position) => {
-    // Exclude 'WELFARE_SECRETARY' and 'FINANCIAL_SECRETARY' for level 200 users
-    if (userLevel.level === "200" && (position === "WELFARE_SECRETARY" || position === "FINANCIAL_SECRETARY")) {
-      console.log(`Excluding position: ${position} for level 200 user`);
-      return; // Skip adding these roles if user is level 200
-    }
-    
-    roles.push({
-      name: position.replace("_", " "), // Format the position name for display
-      key: rolesMap[position],
-      candidates: [],
-    });
-  });
-
-  // Log the initialized roles
-  console.log('Initialized Roles:', roles);
-
-  // Assign candidates to their corresponding role
-  candidates.forEach((candidate) => {
-    // Log each candidate's details
-    console.log('Processing Candidate:', candidate);
-
-    // Exclude 'WELFARE_SECRETARY' and 'FINANCIAL_SECRETARY' candidates if user level is "200"
-    if (this.userLevel.level === "200" && 
-        (candidate.position === "WELFARE_SECRETARY" || candidate.position === "FINANCIAL_SECRETARY")) {
-      console.log(`Excluding candidate: ${candidate.name} for position: ${candidate.position} at level 200`);
-      return; // Skip adding this candidate if they meet the exclusion criteria
-    }
-
-    const role = roles.find(
-      (role) => role.key === rolesMap[candidate.position]
-    );
-
-    if (role) {
-      role.candidates.push({
-        id: candidate._id, // Include the '_id' from the backend response
-        name: candidate.name,
-        image: candidate.image,
-        level: candidate.level,
-        quote: candidate.quote, // Include the 'quote' if needed
-        cloudinary_id: candidate.cloudinary_id, // Include 'cloudinary_id' if needed
+      Object.keys(rolesMap).forEach((position) => {
+        if (this.userLevel.level === "200" && (position === "WELFARE_SECRETARY" || position === "FINANCIAL_SECRETARY")) {
+          return;
+        }
+        
+        roles.push({
+          name: position.replace(/_/g, " "),
+          key: rolesMap[position],
+          candidates: [],
+        });
       });
-      console.log(`Added candidate: ${candidate.name} to role: ${role.name}`);
-    } else {
-      console.log(`No matching role found for candidate: ${candidate.name} with position: ${candidate.position}`);
-    }
-  });
 
-  // Log the final roles with assigned candidates
-  console.log('Final Roles with Candidates:', roles);
+      candidates.forEach((candidate) => {
+        if (this.userLevel.level === "200" && 
+            (candidate.position === "WELFARE_SECRETARY" || candidate.position === "FINANCIAL_SECRETARY")) {
+          return;
+        }
 
-  return roles;
-},
+        const role = roles.find(
+          (role) => role.key === rolesMap[candidate.position]
+        );
 
-//     mapCandidatesToRoles(candidates) {
-//   const rolesMap = {
-//     PRESIDENT: "president",
-//     VICE_PRESIDENT: "vice_president",
-//     SPORT_SECRETARY: "sport_secretary",
-//     ACADEMIC_SECRETARY: "academic_secretary",
-//     GENERAL_SECRETARY: "general_secretary",
-//     ASSISTANT_GENERAL_SECRETARY: "assistant_general_secretary",
-//     PUBLIC_RELATIONS_OFFICER: "public_relations_officer",
-//     SOCIAL_SECRETARY: "social_secretary",
-//     SENATE_200: "senate_200",
-//     SENATE_300: "senate_300",
-//     SENATE_400: "senate_400",
-//     SENATE_500: "senate_500",
-//     FINANCIAL_SECRETARY: "financial_secretary",
-//     WELFARE_SECRETARY: "welfare_secretary",
-//     TREASURER: "treasurer",
-//   };
+        if (role) {
+          role.candidates.push({
+            id: candidate._id,
+            name: candidate.name,
+            image: candidate.image,
+            level: candidate.level,
+            quote: candidate.quote,
+            cloudinary_id: candidate.cloudinary_id,
+          });
+        }
+      });
 
-//   const roles = [];
-
-//   // Determine if the user is at the 200 level
-//   const isLevel200 = this.userLevel.level === "200";
-
-//   // Initialize roles with empty candidates array, conditionally excluding some for level 200
-//   Object.keys(rolesMap).forEach((position) => {
-//     // Exclude 'WELFARE_SECRETARY' and 'FINANCIAL_SECRETARY' for level 200 users
-//     if (
-//       isLevel200 &&
-//       (position === "WELFARE_SECRETARY" || position === "FINANCIAL_SECRETARY")
-//     ) {
-//       return; // Skip adding these roles if user is level 200
-//     }
-
-//     roles.push({
-//       name: position.replace(/_/g, " "), // Format the position name for display
-//       key: rolesMap[position],
-//       candidates: [],
-//     });
-//   });
-
-//   // Assign candidates to their corresponding role
-//   candidates.forEach((candidate) => {
-//     // Exclude 'WELFARE_SECRETARY' and 'FINANCIAL_SECRETARY' candidates if user is level 200
-//     if (
-//       isLevel200 &&
-//       (candidate.position === "WELFARE_SECRETARY" ||
-//         candidate.position === "FINANCIAL_SECRETARY")
-//     ) {
-//       return; // Skip adding this candidate if they meet the exclusion criteria
-//     }
-
-//     const role = roles.find(
-//       (role) => role.key === rolesMap[candidate.position]
-//     );
-
-//     if (role) {
-//       role.candidates.push({
-//         id: candidate._id, // Include the '_id' from the backend response
-//         name: candidate.name,
-//         image: candidate.image,
-//         level: candidate.level,
-//         quote: candidate.quote, // Include the 'quote' if needed
-//         cloudinary_id: candidate.cloudinary_id, // Include 'cloudinary_id' if needed
-//       });
-//     }
-//   });
-
-//   return roles;
-// },
-//     mapCandidatesToRoles(candidates) {
-//       const rolesMap = {
-//         PRESIDENT: "president",
-//         VICE_PRESIDENT: "vice_president",
-//         SPORT_SECRETARY: "sport_secretary",
-//         ACADEMIC_SECRETARY: "academic_secretary",
-//         GENERAL_SECRETARY: "general_secretary",
-//         ASSISTANT_GENERAL_SECRETARY: "assistant_general_secretary",
-//         PUBLIC_RELATIONS_OFFICER: "public_relations_officer",
-//         SOCIAL_SECRETARY: "social_secretary",
-//         SENATE_200: "senate_200",
-//         SENATE_300: "senate_300",
-//         SENATE_400: "senate_400",
-//         SENATE_500: "senate_500",
-//         FINANCIAL_SECRETARY: "financial_secretary",
-//         WELFARE_SECRETARY: "welfare_secretary",
-//         TREASURER: "treasurer",
-//       };
-
-//   const roles = [];
-
-//   // Initialize roles with empty candidates array, conditionally excluding some for level 200
-//   Object.keys(rolesMap).forEach((position) => {
-//     // Exclude 'WELFARE_SECRETARY' and 'FINANCIAL_SECRETARY' for level 200 users
-//     if (this.userLevel.level === "200" && (position === "WELFARE_SECRETARY" || position === "FINANCIAL_SECRETARY")) {
-//       return; // Skip adding these roles if user is level 200
-//     }
-    
-//     roles.push({
-//       name: position.replace("_", " "), // Format the position name for display
-//       key: rolesMap[position],
-//       candidates: [],
-//     });
-//   });
-
-//   // Assign candidates to their corresponding role
-//   candidates.forEach((candidate) => {
-//     // Exclude 'WELFARE_SECRETARY' and 'FINANCIAL_SECRETARY' candidates if their level is "200"
-//     if (candidate.level === "200" && 
-//         (candidate.position === "WELFARE_SECRETARY" || candidate.position === "FINANCIAL_SECRETARY")) {
-//       return; // Skip adding this candidate if they meet the exclusion criteria
-//     }
-
-//     const role = roles.find(
-//       (role) => role.key === rolesMap[candidate.position]
-//     );
-
-//     if (role) {
-//       role.candidates.push({
-//         id: candidate._id, // Include the '_id' from the backend response
-//         name: candidate.name,
-//         image: candidate.image,
-//         level: candidate.level,
-//         quote: candidate.quote, // Include the 'quote' if needed
-//         cloudinary_id: candidate.cloudinary_id, // Include 'cloudinary_id' if needed
-//       });
-//     }
-//   });
-
-//   return roles;
-// },
-
-//     mapCandidatesToRoles(candidates) {
-//   const rolesMap = {
-//     PRESIDENT: "president",
-//     VICE_PRESIDENT: "vice_president",
-//     SPORT_SECRETARY: "sport_secretary",
-//     ACADEMIC_SECRETARY: "academic_secretary",
-//     GENERAL_SECRETARY: "general_secretary",
-//     ASSISTANT_GENERAL_SECRETARY: "assistant_general_secretary",
-//     PUBLIC_RELATIONS_OFFICER: "public_relations_officer",
-//     SOCIAL_SECRETARY: "social_secretary",
-//     SENATE_200: "senate_200",
-//     SENATE_300: "senate_300",
-//     SENATE_400: "senate_400",
-//     SENATE_500: "senate_500",
-//     FINANCIAL_SECRETARY: "financial_secretary",
-//     WELFARE_SECRETARY: "welfare_secretary",
-//     TREASURER: "treasurer",
-//   };
-
-//   const roles = [];
-
-//   // Initialize roles with empty candidates array, conditionally excluding some for level 200
-//   Object.keys(rolesMap).forEach((position) => {
-//     // Exclude 'WELFARE_SECRETARY' and 'FINANCIAL_SECRETARY' for level 200 users
-//     if (this.userLevel.level === "200" && (position === "WELFARE_SECRETARY" || position === "FINANCIAL_SECRETARY")) {
-//       return; // Skip adding these roles if user is level 200
-//     }
-    
-//     roles.push({
-//       name: position.replace("_", " "), // Format the position name for display
-//       key: rolesMap[position],
-//       candidates: [],
-//     });
-//   });
-
-//   // Assign candidates to their corresponding role
-//   candidates.forEach((candidate) => {
-//     const role = roles.find(
-//       (role) => role.key === rolesMap[candidate.position]
-//     );
-//     if (role) {
-//       role.candidates.push({
-//         id: candidate._id, // Include the '_id' from the backend response
-//         name: candidate.name,
-//         image: candidate.image,
-//         level: candidate.level,
-//         quote: candidate.quote, // Include the 'quote' if needed
-//         cloudinary_id: candidate.cloudinary_id, // Include 'cloudinary_id' if needed
-//       });
-//     }
-//   });
-
-//   return roles;
-// },
-
-    // mapCandidatesToRoles(candidates) {
-    //   const rolesMap = {
-    //     PRESIDENT: "president",
-    //     VICE_PRESIDENT: "vice_president",
-    //     SPORT_SECRETARY: "sport_secretary",
-    //     ACADEMIC_SECRETARY: "academic_secretary",
-    //     GENERAL_SECRETARY: "general_secretary",
-    //     ASSISTANT_GENERAL_SECRETARY: "assistant_general_secretary",
-    //     PUBLIC_RELATIONS_OFFICER: "public_relations_officer",
-    //     SOCIAL_SECRETARY: "social_secretary",
-    //     SENATE_200: "senate_200",
-    //     SENATE_300: "senate_300",
-    //     SENATE_400: "senate_400",
-    //     SENATE_500: "senate_500",
-    //     FINANCIAL_SECRETARY: "financial_secretary",
-    //     WELFARE_SECRETARY: "welfare_secretary",
-    //     TREASURER: "treasurer",
-    //     // Add other positions if necessary
-    //   };
-
-    //   const roles = [];
-
-    //   // // Initialize roles with empty candidates array
-    //   // Object.keys(rolesMap).forEach((position) => {
-    //   //   roles.push({
-    //   //     name: position.replace("_", " "), // Format the position name for display
-    //   //     key: rolesMap[position],
-    //   //     candidates: [],
-    //   //   });
-    //   // });
-
-    //     // Initialize roles with empty candidates array
-    //     Object.keys(rolesMap).forEach((position) => {
-    //   // Skip adding 'WELFARE_SECRETARY' and 'FINANCIAL_SECRETARY' for level "200" users
-    //   if (this.userLevel.level === "200" && (position === "WELFARE_SECRETARY" || position === "FINANCIAL_SECRETARY")) {
-    //     return;
-    //   }
-      
-    //   roles.push({
-    //     name: position.replace("_", " "), // Format the position name for display
-    //     key: rolesMap[position],
-    //     candidates: [],
-    //   });
-    // });
-
-
-    //   // Assign candidates to their corresponding role
-    //   candidates.forEach((candidate) => {
-    //     const role = roles.find(
-    //       (role) => role.key === rolesMap[candidate.position]
-    //     );
-    //     if (role) {
-    //       role.candidates.push({
-    //         id: candidate._id, // Include the '_id' from the backend response
-    //         name: candidate.name,
-    //         image: candidate.image,
-    //         level: candidate.level,
-    //         quote: candidate.quote, // Include the 'quote' if needed
-    //         cloudinary_id: candidate.cloudinary_id, // Include 'cloudinary_id' if needed
-    //       });
-    //     }
-    //   });
-
-    //   return roles;
-    // },
+      return roles;
+    },
     toggleSenateSelection(roleKey, candidateId) {
       if (this.votes[roleKey].length === 0) {
-        this.votes[roleKey] = []; // Clear the array if the user previously withheld the vote
+        this.votes[roleKey] = [];
       }
       const selectedCandidates = this.votes[roleKey];
       const index = selectedCandidates.indexOf(candidateId);
 
       if (index > -1) {
-        // If the candidate is already selected, remove them
         selectedCandidates.splice(index, 1);
       } else if (selectedCandidates.length < 3) {
-        // If less than 3 candidates are selected, add the new candidate
         selectedCandidates.push(candidateId);
       }
     },
     withholdSenateVote(roleKey) {
-      this.votes[roleKey] = []; // Clear the array to indicate vote withholding
+      this.votes[roleKey] = [];
     },
   },
   components: {
@@ -656,8 +393,8 @@ export default {
 }
 
 .hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .candidates-container {
