@@ -233,9 +233,9 @@
                 </div>
 
                 <!-- Vote Button -->
+                                   <!-- :disabled="!isVotingWindow" -->
                 <button
                   @click="proceedToVote"
-                  :disabled="!isVotingWindow"
                   class="group relative w-full sm:w-auto inline-flex items-center justify-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-lg overflow-hidden"
                 >
                   <span class="relative z-10">Proceed To Vote</span>
@@ -357,14 +357,15 @@ export default {
   },
   computed: {
     isVotingWindow() {
-      const now = new Date();
-      return (
-        now.getFullYear() === this.votingDate.getFullYear() &&
-        now.getMonth() === this.votingDate.getMonth() &&
-        now.getDate() === this.votingDate.getDate() &&
-        now.getHours() >= this.startHour &&
-        now.getHours() < this.endHour
-      );
+      return true
+      // const now = new Date();
+      // return (
+      //   now.getFullYear() === this.votingDate.getFullYear() &&
+      //   now.getMonth() === this.votingDate.getMonth() &&
+      //   now.getDate() === this.votingDate.getDate() &&
+      //   now.getHours() >= this.startHour &&
+      //   now.getHours() < this.endHour
+      // );
     },
   },
   methods: {
