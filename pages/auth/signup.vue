@@ -326,27 +326,34 @@ export default {
     validateMatricNumber() {
       this.isTyping = true;
     },
-    handleSignup() {
-      this.processing = true;
-      this.$axios
-        .post(
-          "https://nimelssa-elections-backend.onrender.com/api/auth/register",
-          this.form
-        )
-        .then((res) => {
-          this.$toastr.s("Signup was successful! Please login to continue.");
-          this.$router.push("/auth/login");
-        })
-        .catch((error) => {
-          console.error(error.response);
-          const errorMessage =
-            error.response?.data?.message || "Signup failed. Please try again.";
-          this.$toastr.e(errorMessage);
-        })
-        .finally(() => {
-          this.processing = false;
-        });
-    },
+   async handleSignup() {
+  this.processing = true;
+
+  try {
+    const response = await this.$axios.post(
+      "https://nimelssa-elections-backend.onrender.com/api/auth/register",
+      this.form
+    );
+
+    console.log(response);
+    this.$toastr.s("Signup was successful! Please login to continue.");
+    this.$router.push("/auth/login");
+  } catch (error) {
+    console.error(error);
+
+    // Extract meaningful error message from backend response
+    const errorMessage =
+      error.response?.data?.message ||
+      error.response?.data?.error ||
+      error.response?.data?.detail ||
+      "Signup failed. Please try again.";
+
+    this.$toastr.e(errorMessage);
+  } finally {
+    this.processing = false;
+  }
+}
+
   },
 };
 </script>

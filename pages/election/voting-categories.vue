@@ -212,7 +212,7 @@
                     <div class="flex-1 text-left">
                       <h4 class="text-sm font-bold text-red-900 mb-1">Voting Window Closed</h4>
                       <p class="text-sm text-red-700">
-                        Voting is only open on <strong>Wednesday, 6th November {{ new Date().getFullYear() }}</strong>, between <strong>11:00 AM and 7:00 PM</strong>.
+                        Voting is only open on <strong>Monday, 20th October {{ new Date().getFullYear() }}</strong>, between <strong>09:00 AM and 05:00 PM</strong>.
                       </p>
                     </div>
                   </div>
@@ -226,7 +226,7 @@
                     <div class="flex-1 text-left">
                       <h4 class="text-sm font-bold text-green-900 mb-1">Voting is Now Open!</h4>
                       <p class="text-sm text-green-700">
-                        Cast your vote now. Voting closes at <strong>7:00 PM</strong> today.
+                        Cast your vote now. Voting closes at <strong>09:00 PM</strong> today.
                       </p>
                     </div>
                   </div>
