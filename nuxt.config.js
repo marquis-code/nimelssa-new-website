@@ -137,6 +137,13 @@ export default {
     ],
   },
 
+publicRuntimeConfig: {
+  votingDate: process.env.VOTING_DATE || '2025-10-20',
+  votingStartHour: process.env.VOTING_START_HOUR || '9',
+  votingEndHour: process.env.VOTING_END_HOUR || '17',
+  enableTestMode: process.env.ENABLE_TEST_MODE || 'false', // Default to false for safety
+},
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ["@/assets/css/main.css"],
 
@@ -161,6 +168,7 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     "@nuxt/postcss8",
     "@nuxtjs/pwa",
+    "@nuxtjs/dotenv"
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
